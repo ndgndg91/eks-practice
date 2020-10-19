@@ -45,7 +45,7 @@ eksctl-test     |ap-northeast-2
 
 `eksctl delete cluster --name=eksctl-test`
 
-
+### eks deployment 예시 <br>
 `eksctl apply -f nginx-deployment.yaml`
 
 
