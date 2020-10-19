@@ -44,3 +44,8 @@ NAME            |REGION
 eksctl-test     |ap-northeast-2
 
 `eksctl delete cluster --name=eksctl-test`
+
+
+`eksctl apply -f nginx-deployment.yaml`
+
+
