@@ -9,7 +9,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-ma
 https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html
 
 4. install eksctl<br>
-https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/getting-started-eksctl.html
+https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eksctl.html
 
 
 ### eks cluster 생성 예시<br>
