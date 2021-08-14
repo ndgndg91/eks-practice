@@ -1,5 +1,6 @@
 .idea
 .terraform
 
+# terraform plan binary file
 plan.out
 .git
