@@ -2,3 +2,4 @@
 .terraform
 
 plan.out
+.git
