@@ -25,31 +25,26 @@ ip-192-168-55-12.ap-northeast-2.compute.internal   | Ready  | <none> | 8m26s | v
 ip-192-168-64-226.ap-northeast-2.compute.internal  | Ready  | <none> | 8m27s | v1.17.11-eks-cfdc40
 
 
-### eks node group 생성 예시<br>
-`eksctl create nodegroup --config-file=eksctl-create-ng.yaml`<br>
-생성 후, 확인<br>
-`eksctl get nodegroup --cluster=eksctl-test`<br>
+### eks node group 확인<br>
+`eksctl get nodegroup --cluster=eks-workshop`<br>
 
-CLUSTER		|NODEGROUP	|CREATED			|MIN SIZE	|MAX SIZE	|DESIRED CAPACITY	|INSTANCE TYPE	|IMAGE ID
-----------|-----------|-------------|---------|---------|-----------------|---------------|------
-eksctl-test	|ng-default	|2020-10-14T12:32:06Z	|2		|2		|2			|t3.micro	|ami-025592e84db381916
-eksctl-test	|ng1-public	|2020-10-14T12:50:49Z	|2		|2		|2			|t3.micro	|ami-025592e84db381916
-eksctl-test	|ng2-managed	|2020-10-14T12:50:49Z	|1		|3		|2
+CLUSTER     |NODEGROUP      |STATUS         |CREATED                 |MIN SIZE |MAX SIZE |DESIRED CAPACITY|INSTANCE TYPE |IMAGE ID             |ASG NAME
+------------|---------------|---------------|------------------------|---------|---------|----------------|--------------|---------------------|-----------
+eks-workshop| ng-workers    |CREATE_COMPLETE|2021-08-15T12:47:57Z    |2        |2        |2               |t3.micro      |ami-06b4d13fec9187c1d|eksctl-eks-workshop-nodegroup-ng-workers-NodeGroup-JWUXMO1VJQTO
+
+IAM policy
+- AmazonEKSWorkerNodePolicy
+- AmazonEC2ContainerRegistryReadOnly
+- AmazonEKS_CNI_Policy
 
 ### eks cluster 삭제 예시<br>
 `eksctl get cluster`<br>
 
 NAME            |REGION
 ----------------|------
-eksctl-test     |ap-northeast-2
+eks-workshop     |ap-northeast-2
 
 `eksctl delete cluster --name=eksctl-test`
 
 ### eks deployment 예시 <br>
 `eksctl apply -f nginx-deployment.yaml`
-
-
-IAM policy
-- AmazonEKSWorkerNodePolicy
-- AmazonEC2ContainerRegistryReadOnly
-- AmazonEKS_CNI_Policy
