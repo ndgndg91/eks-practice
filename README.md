@@ -21,8 +21,8 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eksctl.html
 
 NAME                                               | STATUS  | ROLES   | AGE    | VERSION
 ---------------------------------------------------|--------|--------|-------|--------------------
-ip-192-168-55-12.ap-northeast-2.compute.internal   | Ready  | <none> | 8m26s | v1.17.11-eks-cfdc40
-ip-192-168-64-226.ap-northeast-2.compute.internal  | Ready  | <none> | 8m27s | v1.17.11-eks-cfdc40
+ip-10-10-132-151.ap-northeast-2.compute.internal   | Ready  | <none> | 8m26s | v1.20.4-eks-6b7464
+ip-10-10-172-58.ap-northeast-2.compute.internal    | Ready  | <none> | 8m27s | v1.20.4-eks-6b7464
 
 
 ### eks node group 확인<br>
