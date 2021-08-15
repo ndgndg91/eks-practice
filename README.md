@@ -49,3 +49,7 @@ eksctl-test     |ap-northeast-2
 `eksctl apply -f nginx-deployment.yaml`
 
 
+IAM policy
+- AmazonEKSWorkerNodePolicy
+- AmazonEC2ContainerRegistryReadOnly
+- AmazonEKS_CNI_Policy

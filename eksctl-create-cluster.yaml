@@ -5,28 +5,19 @@ kind: ClusterConfig
 metadata:
   name: eks-workshop
   region: ap-northeast-2
-  version: 1.20
 
 vpc:
   subnets:
-    public:
-      ap-northeast-2a: 
-        id: terraform outputs 참조
-      ap-northeast-2b: 
-        id: terraform outputs 참조
-      ap-northeast-3c: 
-        id: terraform outputs 참조
     private:
       ap-northeast-2a: 
-        id: terraform outputs 참조
+        id: subnet-0ab9b882ac1f6f9ae
       ap-northeast-2b: 
-        id: terraform outputs 참조  
+        id: subnet-06b1f10cd814f451e
       ap-northeast-2c: 
-        id: terraform outputs 참조  
+        id: subnet-0bfe2f96a42319147
 
 nodeGroups:
   - name: ng-workers
-    labels: {role: workers}
     instanceType: t3.micro
     desiredCapacity: 2
     privateNetworking: true
