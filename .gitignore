@@ -4,3 +4,6 @@
 # terraform plan binary file
 plan.out
 .git
+
+.gradle
+build

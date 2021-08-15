@@ -1,0 +1,3 @@
+rootProject.name = 'eks-practice-application'
+include("api")
+include("batch")
