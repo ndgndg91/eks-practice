@@ -33,7 +33,7 @@ public class IndeedScrapJobConfiguration {
     @Bean
     public Step indeedScrapStep() {
         return stepBuilderFactory.get("indeedScrapStep")
-                .<String, IndeedItems>chunk(1)
+                .<String, IndeedItems>chunk(20)
                 .reader(new IndeedScrapReader())
                 .processor(new IndeedScrapProcessor())
                 .writer(itemWriter())
