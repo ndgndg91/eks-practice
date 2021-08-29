@@ -1,3 +1,12 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka/
 logging:
   level:
     web: debug
