@@ -1,5 +1,6 @@
-package com.ndgndg91.gateway;
+package com.ndgndg91.gateway.configuration;
 
+import com.ndgndg91.gateway.JwtResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -15,7 +16,7 @@ public class SecurityConfiguration {
 
     @Bean
     public JwtResolver jwtResolver(){
-        return new JwtResolver("ndgndg91-temp-key", 30, "ndgndg91", 60 * 24);
+        return new JwtResolver("ndgndg91-temp-key");
     }
 
     @Bean

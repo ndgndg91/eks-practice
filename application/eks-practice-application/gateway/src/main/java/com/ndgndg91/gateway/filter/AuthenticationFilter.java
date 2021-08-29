@@ -1,5 +1,6 @@
-package com.ndgndg91.gateway;
+package com.ndgndg91.gateway.filter;
 
+import com.ndgndg91.gateway.JwtResolver;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
