@@ -1,13 +1,13 @@
-package com.ndgndg91.api;
+package com.ndgndg91.sellerauth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiApplication {
+public class SellerAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+        SpringApplication.run(SellerAuthApplication.class, args);
     }
 
 }
