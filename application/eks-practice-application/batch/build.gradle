@@ -18,6 +18,10 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    enabled = false
+}
+
 dependencies {
     implementation 'org.jsoup:jsoup:1.14.2'
     implementation 'org.springframework.boot:spring-boot-starter-batch'
