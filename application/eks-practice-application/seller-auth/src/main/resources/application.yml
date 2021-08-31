@@ -3,7 +3,3 @@ server:
 spring:
   application:
     name: seller-auth
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:10000/eureka

@@ -1,8 +1,6 @@
 rootProject.name = 'eks-practice-application'
-include("gateway")
 include("seller-auth")
 include("buyer-auth")
 include("product")
 include("order")
 include("batch")
-include("discover")
