@@ -16,12 +16,19 @@ data "terraform_remote_state" "security_group" {
   }
 }
 
-// 해당 버전은 console 을 통해서 생성했습니다.
-data "aws_secretsmanager_secret_version" "prod_seller_auth" {
-  secret_id = "prod/seller-auth/mysql"
+data "terraform_remote_state" "secrets_manager" {
+  backend = "s3"
+  config = {
+    bucket = var.remote_state_bucket
+    key    = var.remote_secrets_manager_key
+    region = var.region
+  }
 }
 
-// 해당 버전은 console 을 통해서 생성했습니다.
-data "aws_secretsmanager_secret_version" "prod_buyer_auth" {
-  secret_id = "prod/buyer-auth/mysql"
+data "aws_secretsmanager_secret_version" "seller_auth" {
+  secret_id = data.terraform_remote_state.secrets_manager.outputs.prod_seller_auth_name
+}
+
+data "aws_secretsmanager_secret_version" "reetest_admin_rds" {
+  secret_id = data.terraform_remote_state.secrets_manager.outputs.prod_buyer_auth_name
 }
