@@ -12,19 +12,19 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "ssm" {
-    name = "SSMInstanceProfile"
+    name = "SSMInstanceRole"
     assume_role_policy = <<EOF
 {
-        "Version" : "2012-10-17",
-        "Statement" : [
-            {
-                "Action" :"sts:AssumeRole",
-                "Principal" : {
-                    "Service" : "ec2.amazonaws.com"
-                },
-                "Effect" : "Allow"
-            }
-        ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
 }
     EOF
 }
@@ -35,16 +35,26 @@ resource "aws_iam_instance_profile" "ssm" {
 }
 
 resource "aws_iam_policy_attachment" "ssm_core" {
-    name       = "ssm-core"
+    name       = "SSMInstanceProfile"
     roles      = [
         aws_iam_role.ssm.id,
     ]
     policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+resource "aws_iam_policy_attachment" "ssm_directory" {
+    name       = "ssm-directory"
+    roles      = [
+        aws_iam_role.ssm.id,
+    ]
+    policy_arn = "arn:aws:iam::aws:policy/AmazonSSMDirectoryServiceAccess"
+}
+
 resource "aws_instance" "bastion" {
     depends_on             = [
         aws_iam_role.ssm,
+        aws_iam_instance_profile.ssm,
+        aws_iam_policy_attachment.ssm_core
     ]
 
     ami                    = "ami-08c64544f5cfcddd0"
