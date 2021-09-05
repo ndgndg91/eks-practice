@@ -26,6 +26,40 @@ locals {
   all_port = 0
 }
 
+resource "aws_security_group" "bastion_host_security_group" {
+  name = "Bastion SSM Security Group"
+  description = "Bastion Host Security Group"
+  vpc_id = data.terraform_remote_state.vpc.outputs.application_vpc_id
+  
+  ingress {
+    from_port = local.http_port
+    protocol =  local.tcp_protocol
+    to_port = local.http_port
+    cidr_blocks = local.all_addresses_cidr_block
+  }
+  
+  ingress {
+    from_port = local.ssh_port
+    protocol =  local.tcp_protocol
+    to_port = local.ssh_port
+    cidr_blocks = local.all_addresses_cidr_block
+  }
+  
+  ingress {
+    from_port = local.https_port
+    protocol = local.tcp_protocol
+    to_port = local.https_port
+    cidr_blocks = local.all_addresses_cidr_block
+  }
+  
+  egress {
+    from_port = local.all_port
+    protocol = local.all_protocol
+    to_port = local.all_port
+    cidr_blocks = local.all_addresses_cidr_block
+  }
+}
+
 resource "aws_security_group" "application_public_subnet_security_group" {
   name = "Public ALB Security Group"
   description = "ALB Security Group Allow 80 to 80"
