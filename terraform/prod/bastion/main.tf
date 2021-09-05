@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "ssm" {
-    name = "ssm-ec2"
+    name = "SSMInstanceProfile"
     assume_role_policy = <<EOF
 {
         "Version" : "2012-10-17",
@@ -22,8 +22,7 @@ resource "aws_iam_role" "ssm" {
                 "Principal" : {
                     "Service" : "ec2.amazonaws.com"
                 },
-                "Effect" : "Allow",
-                "Sid" : "EksPracticeSSMRole"
+                "Effect" : "Allow"
             }
         ]
 }
@@ -36,29 +35,25 @@ resource "aws_iam_instance_profile" "ssm" {
 }
 
 resource "aws_iam_policy_attachment" "ssm_core" {
-    name = "ssm-core"
-    roles = [
+    name       = "ssm-core"
+    roles      = [
         aws_iam_role.ssm.id,
     ]
     policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
-resource "aws_iam_policy_attachment" "ssm_ec2" {
-    name = "ssm-ec2"
-    roles = [
-        aws_iam_role.ssm.id,
-    ]
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-}
-
 resource "aws_instance" "bastion" {
-    ami = "ami-08c64544f5cfcddd0"
-    instance_type = "t2.micro"
-    vpc_security_group_ids = [
-        data.terraform_remote_state.security_group.outputs.bastion_host_security_group_id,
+    depends_on             = [
+        aws_iam_role.ssm,
     ]
-    subnet_id = data.terraform_remote_state.vpc.outputs.application_public_1_subnet_id
-    key_name = "eks-terraform"
-    iam_instance_profile = aws_iam_instance_profile.ssm.id
-    user_data = file("./install-ssm.sh")
+
+    ami                    = "ami-08c64544f5cfcddd0"
+    instance_type          = "t2.micro"
+    vpc_security_group_ids = [
+        data.terraform_remote_state.security_group.outputs.application_private_subnet_security_group_id,
+    ]
+    subnet_id              = data.terraform_remote_state.vpc.outputs.application_private_1_subnet_id
+    key_name               = "eks-terraform"
+    iam_instance_profile   = aws_iam_instance_profile.ssm.id
+    user_data              = file("./install-ssm.sh")
 }
