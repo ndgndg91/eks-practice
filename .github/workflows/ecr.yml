@@ -44,8 +44,11 @@ jobs:
     - name: Set env to production
       run: |
         if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "ECR_ADMIN=selleree-admin" >> $GITHUB_ENV
-            echo "ECR_EDITOR=selleree-editor" >> $GITHUB_ENV
+            echo "ECR_SELLER=eks-workshop-seller-auth" >> $GITHUB_ENV
+            echo "ECR_BUYER=eks-workshop-buyer-auth" >> $GITHUB_ENV
+            echo "ECR_PRODUCT=eks-workshop-product" >> $GITHUB_ENV
+            echo "ECR_ORDER=eks-workshop-order" >> $GITHUB_ENV
+            echo "ECR_BATCH=eks-workshop-batch" >> $GITHUB_ENV
             echo "AWS_ACCESS_KEY_ID=${{ secrets.PROD_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
         fi
@@ -53,16 +56,22 @@ jobs:
       if: |
         github.event_name == 'push' && endsWith(github.ref, 'test')
       run: |
-        echo "ECR_ADMIN=reetest-admin" >> $GITHUB_ENV
-        echo "ECR_EDITOR=reetest-editor" >> $GITHUB_ENV
+        echo "ECR_SELLER=eks-workshop-seller-auth" >> $GITHUB_ENV
+        echo "ECR_BUYER=eks-workshop-buyer-auth" >> $GITHUB_ENV
+        echo "ECR_PRODUCT=eks-workshop-product" >> $GITHUB_ENV
+        echo "ECR_ORDER=eks-workshop-order" >> $GITHUB_ENV
+        echo "ECR_BATCH=eks-workshop-batch" >> $GITHUB_ENV
         echo "AWS_ACCESS_KEY_ID=${{ secrets.STAGE_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
         echo "AWS_SECRET_ACCESS_KEY=${{ secrets.STAGE_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
     - name: Set env to dev staging
       if: |
         github.event_name == 'push' && endsWith(github.ref, 'development')
       run: |
-        echo "ECR_ADMIN=reedev-admin" >> $GITHUB_ENV
-        echo "ECR_EDITOR=reedev-editor" >> $GITHUB_ENV
+        echo "ECR_SELLER=eks-workshop-seller-auth" >> $GITHUB_ENV
+        echo "ECR_BUYER=eks-workshop-buyer-auth" >> $GITHUB_ENV
+        echo "ECR_PRODUCT=eks-workshop-product" >> $GITHUB_ENV
+        echo "ECR_ORDER=eks-workshop-order" >> $GITHUB_ENV
+        echo "ECR_BATCH=eks-workshop-batch" >> $GITHUB_ENV
         echo "AWS_ACCESS_KEY_ID=${{ secrets.STAGE_AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
         echo "AWS_SECRET_ACCESS_KEY=${{ secrets.STAGE_AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
     - name: Configure AWS credentials
@@ -85,7 +94,7 @@ jobs:
       id: seller-auth-build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.ECR_ADMIN }}
+        ECR_REPOSITORY: ${{ env.ECR_SELLER }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
@@ -102,7 +111,7 @@ jobs:
       id: buyer-auth-build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.ECR_EDITOR }}
+        ECR_REPOSITORY: ${{ env.ECR_BUYER }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
@@ -119,7 +128,7 @@ jobs:
       id: product-build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.ECR_EDITOR }}
+        ECR_REPOSITORY: ${{ env.ECR_PRODUCT }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
@@ -136,7 +145,7 @@ jobs:
       id: order-build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.ECR_EDITOR }}
+        ECR_REPOSITORY: ${{ env.ECR_ORDER }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
@@ -145,6 +154,23 @@ jobs:
         ./gradlew clean
         ./gradlew :order:build --stacktrace
         cd order
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+  - name: Batch Build, tag, and push image to Amazon ECR
+      id: batch-build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ env.ECR_BATCH }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        # Build a docker container and
+        # push it to ECR
+        cd application/eks-practice-application
+        ./gradlew clean
+        ./gradlew :batch:build --stacktrace
+        cd batch
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
