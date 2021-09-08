@@ -13,7 +13,7 @@ provider "aws" {
 
 locals {
     eks_workshop_seller_auth="eks-workshop-seller-auth"
-    eks_workshop_buyer_auth="eks-workshop-buyer-auth-"
+    eks_workshop_buyer_auth="eks-workshop-buyer-auth"
     eks_workshop_product="eks-workshop-product"
     eks_workshop_order="eks-workshop-order"
     eks_workshop_batch="eks-workshop-batch"
@@ -21,7 +21,7 @@ locals {
 
 resource "aws_ecr_repository" "eks_workshop_seller_auth" {
   name                 = local.eks_workshop_seller_auth
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
@@ -30,7 +30,7 @@ resource "aws_ecr_repository" "eks_workshop_seller_auth" {
 
 resource "aws_ecr_repository" "eks_workshop_buyer_auth" {
   name                 = local.eks_workshop_buyer_auth
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
@@ -39,7 +39,7 @@ resource "aws_ecr_repository" "eks_workshop_buyer_auth" {
 
 resource "aws_ecr_repository" "eks_workshop_product" {
   name                 = local.eks_workshop_product
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
@@ -48,7 +48,7 @@ resource "aws_ecr_repository" "eks_workshop_product" {
 
 resource "aws_ecr_repository" "eks_workshop_order" {
   name                 = local.eks_workshop_order
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
@@ -57,7 +57,7 @@ resource "aws_ecr_repository" "eks_workshop_order" {
 
 resource "aws_ecr_repository" "eks_workshop_batch" {
   name                 = local.eks_workshop_batch
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
