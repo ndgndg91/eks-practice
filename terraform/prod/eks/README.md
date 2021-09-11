@@ -16,32 +16,38 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl get namespace
 </pre>
 
-- deploy admin pods
+- create namespace
 <pre>
-    kubectl apply -f admin-deployment.yml
-    kubectl descirbe pod reedev-admin
-    kubectl delete deployment reedev-admin
+    kubectl apply -f namespace.yaml
+    kubectl get namespace
 </pre>
 
-- deploy editor pods
+- deploy seller-auth pods
 <pre>
-    kubectl apply -f editor-deployment.yml
-    kubectl descirbe pod reedev-editor
-    kubectl delete deployment reedev-editor
+    kubectl apply -f seller-auth-deployment.yaml
+    kubectl get pod -n eks-workshop
+    kubectl delete -f seller-auth-deployment.yaml
 </pre>
 
-- expose admin by loadbalancer service
+- deploy buyer-auth pods
 <pre>
-    kubectl create -f admin-lb.yml
-    kubectl get service/reedev-admin-service-loadbalancer |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
-    kubectl delete service/reedev-admin-service-loadbalancer
+    kubectl apply -f buyer-auth-deployment.yaml
+    kubectl get pod -n eks-workshop
+    kubectl delete -f byuer-auth-deployment.yaml
 </pre>
 
-- expose editor by loadbalancer serivce
+- deploy product pods
 <pre>
-    kubectl create -f editor-lb.yml
-    kubectl get service/reedev-editor-service-loadbalancer | aws {'print $1" " $2 " " $4 " " $5'} | column -t
-    kubectl delete service/reedev-editor-service-loadbalancer
+    kubectl apply -f product-deployment.yaml
+    kubectl get pod -n eks-workshop
+    kubectl delete -f product-deployment.yaml
+</pre>
+
+- deploy order pods
+<pre>
+    kubectl apply -f order-deployment.yaml
+    kubectl get pod -n eks-workshop
+    kubectl delete -f order-deployment.yaml
 </pre>
 
 
