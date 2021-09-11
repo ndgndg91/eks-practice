@@ -32,4 +32,4 @@ spec:
       protocol: TCP
   type: NodePort
   selector:
-    app.kubernetes.io/name: buyer-auth
+    app.kubernetes.io/name: seller-auth

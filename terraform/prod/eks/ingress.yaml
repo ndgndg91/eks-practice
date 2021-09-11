@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eks-workshop-ingress
+  namespace: eks-workshop
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/security-groups: sg-042341e2370055306
+  labels:
+    app: eks-workshop-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /seller-auth
+        pathType: Prefix
+        backend:
+          service:
+            name: service-seller-auth
+            port:
+              number: 1010
+      - path: /buyer-auth
+        pathType: Prefix
+        backend:
+          service:
+             name: service-buyer-auth
+             port: 
+               number: 2020
+      - path: /product
+        pathType: Prefix
+        backend:
+            service:
+                name: service-product
+                port: 
+                  number: 3030
+      - path: /order
+        pathType: Prefix
+        backend:
+            service:
+                name: service-order
+                port: 
+                  number: 4040
