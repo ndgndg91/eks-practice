@@ -53,18 +53,18 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
 
 - ingress controller
 <pre>
+    ingress-controller-deployment.yaml 을 통해서 alb-ingress-controller 를 생성하기 전에 node group 이 속한 vpc id 로 변경해주어야 한다.
+    ingress.yaml 을 통해서 ingress 를 생성하기 전에 각각 NodePort Service 에 매핑된 Port Number 로 변경해주어야 한다.
+</pre>
+<pre>
     eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=eks-workshop-cluster --approve
-    wget -O alb-ingress-iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/iam-policy.json
-    aws iam create-policy --policy-name ALBIngressControllerIAMPolicy --policy-document file://alb-ingress-iam-policy.json
-    curl -o rbac-role-alb-ingress-controller.yaml https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/rbac-role.yaml
     kubectl apply -f rbac-role-alb-ingress-controller.yaml
-    sudo yum install jq -y
-    AWS_ACCOUNT_ID=$(aws sts get-caller-identity | jq -r '.Account')
-    eksctl create iamserviceaccount --cluster=eks-workshop-cluster --name=alb-ingress-controller --namespace=kube-system --attach-policy-arn=arn:aws:iam::$AWS_ACCOUNT_ID:policy/ALBIngressControllerIAMPolicy --approve
     kubectl apply -f ingress-controller-deployment.yaml    
+    kubectl logs {alb-ingress-controller-pod-name} -n kube-system -f
+    kubectl apply -f ingress.yaml
 </pre>
 
 
-- TODO
-ingress controller error
-leaderelection.go:270] error retrieving resource lock kube-system/ingress-controller-leader-alb: configmaps "ingress-controller-leader-alb" is forbidden: User "system:serviceaccount:kube-system:alb-ingress-controller" cannot get resource "configmaps" in API group "" in the namespace "kube-system"
+### urls
+- https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/rbac-role.yaml
+- https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/iam-policy.json

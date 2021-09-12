@@ -25,7 +25,9 @@ resource "aws_vpc" "application_vpc" {
   instance_tenancy     = local.application_vpc_instance_tenancy
 
   tags = {
-    Name = "application"
+    Name                                         = "application"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -50,6 +52,8 @@ resource "aws_subnet" "application_public_1_subnet" {
 
   tags = {
     Name = "application_public_1"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -62,6 +66,8 @@ resource "aws_subnet" "application_public_2_subnet" {
 
   tags = {
     Name = "application_public_2"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -74,6 +80,8 @@ resource "aws_subnet" "application_public_3_subnet" {
 
   tags = {
     Name = "application_public_3"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -86,6 +94,8 @@ resource "aws_subnet" "application_private_1_subnet" {
 
   tags = {
     Name = "application_private_1"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -98,6 +108,8 @@ resource "aws_subnet" "application_private_2_subnet" {
 
   tags = {
     Name = "application_private_2"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 
@@ -110,6 +122,8 @@ resource "aws_subnet" "application_private_3_subnet" {
 
   tags = {
     Name = "application_private_3"
+    "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
+    "kubernetes.io/role/elb"                     = "1"
   }
 }
 

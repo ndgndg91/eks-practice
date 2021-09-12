@@ -87,6 +87,20 @@ resource "aws_iam_role" "eks_workshop_node" {
 POLICY
 }
 
+data "http" "eks_workshop_node_IngressController" {
+  url = "https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/iam-policy.json"
+
+  request_headers = {
+    Accept = "application/json"
+  }
+}
+
+resource "aws_iam_role_policy" "eks_workshop_node_IngressControllerPolicy" {
+  name   = "IngressControllerPolicy"
+  role   = aws_iam_role.eks_workshop_node.name
+  policy = data.http.eks_workshop_node_IngressController.body
+}
+
 resource "aws_iam_role_policy_attachment" "eks_workshop_node_AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.eks_workshop_node.name
@@ -118,7 +132,7 @@ resource "aws_eks_node_group" "eks_workshop_node_group" {
     min_size     = 1
   }
 
-  instance_types = ["t3.medium"]
+  instance_types = ["t3.small"]
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_workshop_node_AmazonEKSWorkerNodePolicy,

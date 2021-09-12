@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/security-groups: sg-042341e2370055306
+    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
   labels:
     app: eks-workshop-ingress
 spec:
@@ -19,25 +19,25 @@ spec:
           service:
             name: service-seller-auth
             port:
-              number: 1010
+              number: 32527
       - path: /buyer-auth
         pathType: Prefix
         backend:
           service:
-             name: service-buyer-auth
-             port: 
-               number: 2020
+            name: service-buyer-auth
+            port: 
+              number: 31864
       - path: /product
         pathType: Prefix
         backend:
-            service:
-                name: service-product
-                port: 
-                  number: 3030
+          service:
+            name: service-product
+            port: 
+              number: 31225
       - path: /order
         pathType: Prefix
         backend:
-            service:
-                name: service-order
-                port: 
-                  number: 4040
+          service:
+            name: service-order
+            port: 
+              number: 31155
