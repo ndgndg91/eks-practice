@@ -20,26 +20,28 @@ import java.util.List;
 public class SellerController {
     private final SellerRepository sellerRepository;
 
-    @GetMapping("/apis/sellers")
+    @GetMapping("/seller-auth")
+    public ResponseEntity<String> ok() {
+        return ResponseEntity.ok("ok seller-auth application");
+    }
+
+    @GetMapping("/seller-auth/sellers")
     public ResponseEntity<List<Seller>> findAll() {
-        log.info("들어왔다야!");
         return ResponseEntity.ok(sellerRepository.findAll());
     }
 
-    @GetMapping("/apis/sellers/{id}")
+    @GetMapping("/seller-auth/sellers/{id}")
     public ResponseEntity<Seller> findById(
             @PathVariable long id
     ) {
-        log.info("들어왔다야!");
         return ResponseEntity.ok(sellerRepository.findById(id).orElseThrow());
     }
 
-    @PostMapping("/apis/sellers")
+    @PostMapping("/seller-auth/sellers")
     public ResponseEntity<Seller> create() {
-        log.info("들어왔다야!");
         var save = sellerRepository.save(new Seller());
         return ResponseEntity
-                .created(URI.create("/apis/sellers/" + save.getIdentifier()))
+                .created(URI.create("/seller-auth/sellers/" + save.getIdentifier()))
                 .build();
     }
 }

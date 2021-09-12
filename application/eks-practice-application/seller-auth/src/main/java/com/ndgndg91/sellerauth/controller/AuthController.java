@@ -18,7 +18,7 @@ public class AuthController {
 
     private final JwtResolver jwtResolver;
 
-    @PostMapping("/apis/sellers/login")
+    @PostMapping("/seller-auth/sellers/login")
     public ResponseEntity<LoginResponse> login(@RequestBody final LoginRequest request) {
         final var seller = sellerRepository.login(request.getIdentifier(), request.getPassword())
                 .orElseThrow();
