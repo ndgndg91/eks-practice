@@ -1,5 +1,8 @@
 set-profile:
 	export AWS_PROFILE=donggil
+create-vpc:
+	cd prod/vpc && terraform plan -var-file="prod.tfvars" -out plan.out
+	cd prod/vpc && terraform apply -auto-approve plan.out
 create-network: set-profile
 	cd prod/vpc && terraform plan -var-file="prod.tfvars" -out plan.out
 	cd prod/vpc && terraform apply -auto-approve plan.out
@@ -25,5 +28,3 @@ destroy-security:
 destroy-vpc:
 	cd prod/vpc && terraform destroy -var-file="prod.tfvars" -auto-approve
 destroy-network: set-profile destroy-security destroy-vpc
-	
-	
