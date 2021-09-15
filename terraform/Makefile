@@ -1,5 +1,5 @@
 set-profile:
-	export AWS_PROFILE=k8s-user
+	export AWS_PROFILE=donggil
 create-network: set-profile
 	cd prod/vpc && terraform plan -var-file="prod.tfvars" -out plan.out
 	cd prod/vpc && terraform apply -auto-approve plan.out

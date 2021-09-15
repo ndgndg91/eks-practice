@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    region         = "ap-northeast-2"
-    bucket         = "eks-terraform-workshop-ndgndg91"
-    key            = "ecr/terraform.tfstate"
-    encrypt        = true
+    region  = "ap-northeast-2"
+    bucket  = "donggil-terraform-state"
+    key     = "ecr/terraform.tfstate"
+    encrypt = true
   }
 }
 
@@ -12,11 +12,11 @@ provider "aws" {
 }
 
 locals {
-    eks_workshop_seller_auth="eks-workshop-seller-auth"
-    eks_workshop_buyer_auth="eks-workshop-buyer-auth"
-    eks_workshop_product="eks-workshop-product"
-    eks_workshop_order="eks-workshop-order"
-    eks_workshop_batch="eks-workshop-batch"
+  eks_workshop_seller_auth = "eks-workshop-seller-auth"
+  eks_workshop_buyer_auth  = "eks-workshop-buyer-auth"
+  eks_workshop_product     = "eks-workshop-product"
+  eks_workshop_order       = "eks-workshop-order"
+  eks_workshop_batch       = "eks-workshop-batch"
 }
 
 resource "aws_ecr_repository" "eks_workshop_seller_auth" {
@@ -25,6 +25,10 @@ resource "aws_ecr_repository" "eks_workshop_seller_auth" {
 
   image_scanning_configuration {
     scan_on_push = true
+  }
+
+  tags = {
+    owned = "donggil"
   }
 }
 
@@ -35,6 +39,10 @@ resource "aws_ecr_repository" "eks_workshop_buyer_auth" {
   image_scanning_configuration {
     scan_on_push = true
   }
+
+  tags = {
+    owned = "donggil"
+  }
 }
 
 resource "aws_ecr_repository" "eks_workshop_product" {
@@ -43,6 +51,10 @@ resource "aws_ecr_repository" "eks_workshop_product" {
 
   image_scanning_configuration {
     scan_on_push = true
+  }
+
+  tags = {
+    owned = "donggil"
   }
 }
 
@@ -53,6 +65,10 @@ resource "aws_ecr_repository" "eks_workshop_order" {
   image_scanning_configuration {
     scan_on_push = true
   }
+
+  tags = {
+    owned = "donggil"
+  }
 }
 
 resource "aws_ecr_repository" "eks_workshop_batch" {
@@ -61,5 +77,9 @@ resource "aws_ecr_repository" "eks_workshop_batch" {
 
   image_scanning_configuration {
     scan_on_push = true
+  }
+
+  tags = {
+    owned = "donggil"
   }
 }

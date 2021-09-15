@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     region         = "ap-northeast-2"
-    bucket         = "eks-terraform-workshop-ndgndg91"
+    bucket         = "donggil-terraform-state"
     key            = "security-group/terraform.tfstate"
     encrypt        = true
   }

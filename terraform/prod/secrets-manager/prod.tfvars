@@ -1,1 +1,1 @@
-region="ap-northeast-2"
+region = "ap-northeast-2"

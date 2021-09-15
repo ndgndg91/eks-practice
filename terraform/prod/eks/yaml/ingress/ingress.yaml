@@ -19,25 +19,25 @@ spec:
           service:
             name: service-seller-auth
             port:
-              number: 32527
+              number: 1010
       - path: /buyer-auth
         pathType: Prefix
         backend:
           service:
             name: service-buyer-auth
             port: 
-              number: 31864
+              number: 2020
       - path: /product
         pathType: Prefix
         backend:
           service:
             name: service-product
             port: 
-              number: 31225
+              number: 3030
       - path: /order
         pathType: Prefix
         backend:
           service:
             name: service-order
             port: 
-              number: 31155
+              number: 4040

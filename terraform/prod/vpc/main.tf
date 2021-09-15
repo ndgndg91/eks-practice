@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    region         = "ap-northeast-2"
-    bucket         = "eks-terraform-workshop-ndgndg91"
-    key            = "vpc/terraform.tfstate"
-    encrypt        = true
+    region  = "ap-northeast-2"
+    bucket  = "donggil-terraform-state"
+    key     = "vpc/terraform.tfstate"
+    encrypt = true
   }
 }
 
@@ -13,8 +13,8 @@ provider "aws" {
 
 locals {
   application_vpc_instance_tenancy = "default"
-  rds_vpc_instance_tenancy = "default"
-  nat_destination_cidr_block = "0.0.0.0/0"
+  rds_vpc_instance_tenancy         = "default"
+  nat_destination_cidr_block       = "0.0.0.0/0"
 }
 
 // application node 를 provisioning 하기 위한 vpc
@@ -28,6 +28,7 @@ resource "aws_vpc" "application_vpc" {
     Name                                         = "application"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -39,7 +40,8 @@ resource "aws_vpc" "rds_vpc" {
   instance_tenancy     = local.rds_vpc_instance_tenancy
 
   tags = {
-    Name = "rds"
+    Name    = "rds"
+    "owned" = "donggil"
   }
 }
 
@@ -51,9 +53,10 @@ resource "aws_subnet" "application_public_1_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_public_1"
+    Name                                         = "application_public_1"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -65,9 +68,10 @@ resource "aws_subnet" "application_public_2_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_public_2"
+    Name                                         = "application_public_2"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -79,9 +83,10 @@ resource "aws_subnet" "application_public_3_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_public_3"
+    Name                                         = "application_public_3"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -93,9 +98,10 @@ resource "aws_subnet" "application_private_1_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_private_1"
+    Name                                         = "application_private_1"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -107,9 +113,10 @@ resource "aws_subnet" "application_private_2_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_private_2"
+    Name                                         = "application_private_2"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -121,9 +128,10 @@ resource "aws_subnet" "application_private_3_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "application_private_3"
+    Name                                         = "application_private_3"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
+    "owned"                                      = "donggil"
   }
 }
 
@@ -135,7 +143,8 @@ resource "aws_subnet" "rds_private_1_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "rds_private_1"
+    Name    = "rds_private_1"
+    "owned" = "donggil"
   }
 }
 
@@ -147,7 +156,8 @@ resource "aws_subnet" "rds_private_2_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "rds_private_2"
+    Name    = "rds_private_2"
+    "owned" = "donggil"
   }
 }
 
@@ -159,7 +169,8 @@ resource "aws_subnet" "rds_private_3_subnet" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "rds_private_3"
+    Name    = "rds_private_3"
+    "owned" = "donggil"
   }
 }
 
@@ -169,7 +180,8 @@ resource "aws_route_table" "application_public_route_table" {
   vpc_id = aws_vpc.application_vpc.id
 
   tags = {
-    Name = "application_public__route_table"
+    Name    = "application_public__route_table"
+    "owned" = "donggil"
   }
 }
 
@@ -179,7 +191,8 @@ resource "aws_route_table" "application_private_route_table" {
   vpc_id = aws_vpc.application_vpc.id
 
   tags = {
-    Name = "application_private__route_table"
+    Name    = "application_private__route_table"
+    "owned" = "donggil"
   }
 }
 
@@ -188,7 +201,8 @@ resource "aws_route_table" "rds_private_route_table" {
   vpc_id = aws_vpc.rds_vpc.id
 
   tags = {
-    Name = "rds_private__route_table"
+    Name    = "rds_private__route_table"
+    "owned" = "donggil"
   }
 }
 
@@ -197,7 +211,8 @@ resource "aws_internet_gateway" "application_vpc_internet_gateway" {
   vpc_id = aws_vpc.application_vpc.id
 
   tags = {
-    Name = "application_vpc_internet_gateway"
+    Name    = "application_vpc_internet_gateway"
+    "owned" = "donggil"
   }
 }
 
@@ -264,20 +279,21 @@ resource "aws_route_table_association" "rds_private_subnet_3_association" {
 
 // application vpc 와 rds vpc 의 peering
 resource "aws_vpc_peering_connection" "application_vpc_peering_rds_vpc" {
-  vpc_id      = aws_vpc.rds_vpc.id // requester
+  vpc_id      = aws_vpc.rds_vpc.id         // requester
   peer_vpc_id = aws_vpc.application_vpc.id // accepter
   auto_accept = true
 
   tags = {
-    Name = "vpc_peering_between_application_and_rds"
+    Name    = "vpc_peering_between_application_and_rds"
+    "owned" = "donggil"
   }
 }
 
 // application public route table 애 rds vpc 라우팅 설정
 resource "aws_route" "application_public_to_rds_private" {
-  route_table_id = aws_route_table.application_public_route_table.id
+  route_table_id            = aws_route_table.application_public_route_table.id
   vpc_peering_connection_id = aws_vpc_peering_connection.application_vpc_peering_rds_vpc.id
-  destination_cidr_block = aws_vpc.rds_vpc.cidr_block
+  destination_cidr_block    = aws_vpc.rds_vpc.cidr_block
 }
 
 // application private route table 에 rds vpc 라우팅 설정
@@ -299,7 +315,8 @@ resource "aws_eip" "application_nat_eip" {
   vpc = true
 
   tags = {
-    Name = "application_nat_gw_eip"
+    Name    = "application_nat_gw_eip"
+    "owned" = "donggil"
   }
 }
 
@@ -309,7 +326,8 @@ resource "aws_nat_gateway" "application_nat_gw" {
   subnet_id     = aws_subnet.application_public_1_subnet.id
 
   tags = {
-    Name = "NAT_gateway_in_application_public_1_subnet"
+    Name    = "NAT_gateway_in_application_public_1_subnet"
+    "owned" = "donggil"
   }
 }
 

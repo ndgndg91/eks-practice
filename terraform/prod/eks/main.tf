@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     region  = "ap-northeast-2"
-    bucket  = "eks-terraform-workshop-ndgndg91"
+    bucket  = "donggil-terraform-state"
     key     = "eks/terraform.tfstate"
     encrypt = true
   }
@@ -34,6 +34,10 @@ resource "aws_iam_role" "eks_workshop_cluster" {
   ]
 }
 POLICY
+
+  tags = {
+    "owned" = "donggil"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "eks_workshop_cluster_AmazonEKSClusterPolicy" {
@@ -59,6 +63,10 @@ resource "aws_eks_cluster" "eks_workshop_cluster" {
   depends_on = [
     aws_iam_role_policy_attachment.eks_workshop_cluster_AmazonEKSClusterPolicy
   ]
+
+  tags = {
+    "owned" = "donggil"
+  }
 }
 
 
@@ -85,6 +93,9 @@ resource "aws_iam_role" "eks_workshop_node" {
   ]
 }
 POLICY
+  tags = {
+    "owned" = "donggil"
+  }
 }
 
 data "http" "eks_workshop_node_IngressController" {
@@ -132,11 +143,15 @@ resource "aws_eks_node_group" "eks_workshop_node_group" {
     min_size     = 1
   }
 
-  instance_types = ["t3.small"]
+  instance_types = ["t3.medium"]
 
   depends_on = [
     aws_iam_role_policy_attachment.eks_workshop_node_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.eks_workshop_node_AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.eks_workshop_node_AmazonEC2ContainerRegistryReadOnly,
   ]
+
+  tags = {
+    "owned" = "donggil"
+  }
 }
