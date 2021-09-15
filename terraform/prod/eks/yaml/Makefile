@@ -12,3 +12,8 @@ destroy-ingress:
 	cd ingress && kubectl delete -f rbac-role-alb-ingress-controller.yaml
 	cd ingress && kubectl delete -f ingress-controller-deployment.yaml
 	cd ingress && kubectl delete -f ingress.yaml
+destroy-apps:
+	cd application && kubectl delete -f seller-auth-deployment.yaml
+	cd application && kubectl delete -f buyer-auth-deployment.yaml
+	cd application && kubectl delete -f product-deployment.yaml
+	cd application && kubectl delete -f order-deployment.yaml
