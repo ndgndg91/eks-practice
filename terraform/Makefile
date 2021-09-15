@@ -20,7 +20,10 @@ destroy-bastion: set-profile
 	cd prod/bastion && terraform destroy -var-file="prod.tfvars" -auto-approve
 destroy-eks: set-profile
 	cd prod/eks && terraform destroy -var-file="prod.tfvars" -auto-approve
-destroy-network: set-profile
+destroy-security:
 	cd prod/security-group && terraform destroy -var-file="prod.tfvars" -auto-approve
+destroy-vpc:
 	cd prod/vpc && terraform destroy -var-file="prod.tfvars" -auto-approve
+destroy-network: set-profile destroy-security destroy-vpc
+	
 	
