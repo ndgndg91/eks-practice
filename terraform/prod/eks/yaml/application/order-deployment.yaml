@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: order
     spec:
       containers:
-      - image: 502697621694.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-order:v1.0.5
+      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-order:v1.0.6
         imagePullPolicy: Always
         name: order
         ports:
