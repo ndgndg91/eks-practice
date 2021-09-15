@@ -60,7 +60,7 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=eks-workshop-cluster --approve
     kubectl apply -f rbac-role-alb-ingress-controller.yaml
     kubectl apply -f ingress-controller-deployment.yaml    
-    kubectl logs {alb-ingress-controller-pod-name} -n kube-system -f
+    kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o 'aws-load-balancer-controller[a-zA-Z0-9-]+')
     kubectl apply -f ingress.yaml
 </pre>
 
