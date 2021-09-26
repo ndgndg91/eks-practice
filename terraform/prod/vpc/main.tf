@@ -28,7 +28,7 @@ resource "aws_vpc" "application_vpc" {
     Name                                         = "application"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_vpc" "rds_vpc" {
 
   tags = {
     Name    = "rds"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -56,7 +56,7 @@ resource "aws_subnet" "application_public_1_subnet" {
     Name                                         = "application_public_1"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -71,7 +71,7 @@ resource "aws_subnet" "application_public_2_subnet" {
     Name                                         = "application_public_2"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -86,7 +86,7 @@ resource "aws_subnet" "application_public_3_subnet" {
     Name                                         = "application_public_3"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -101,7 +101,7 @@ resource "aws_subnet" "application_private_1_subnet" {
     Name                                         = "application_private_1"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -116,7 +116,7 @@ resource "aws_subnet" "application_private_2_subnet" {
     Name                                         = "application_private_2"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -131,7 +131,7 @@ resource "aws_subnet" "application_private_3_subnet" {
     Name                                         = "application_private_3"
     "kubernetes.io/cluster/eks-workshop-cluster" = "shared"
     "kubernetes.io/role/elb"                     = "1"
-    "owned"                                      = "donggil"
+    Owned                                      = "donggil"
   }
 }
 
@@ -144,7 +144,7 @@ resource "aws_subnet" "rds_private_1_subnet" {
 
   tags = {
     Name    = "rds_private_1"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -157,7 +157,7 @@ resource "aws_subnet" "rds_private_2_subnet" {
 
   tags = {
     Name    = "rds_private_2"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -170,7 +170,7 @@ resource "aws_subnet" "rds_private_3_subnet" {
 
   tags = {
     Name    = "rds_private_3"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -181,7 +181,7 @@ resource "aws_route_table" "application_public_route_table" {
 
   tags = {
     Name    = "application_public__route_table"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -192,7 +192,7 @@ resource "aws_route_table" "application_private_route_table" {
 
   tags = {
     Name    = "application_private__route_table"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -202,7 +202,7 @@ resource "aws_route_table" "rds_private_route_table" {
 
   tags = {
     Name    = "rds_private__route_table"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -212,7 +212,7 @@ resource "aws_internet_gateway" "application_vpc_internet_gateway" {
 
   tags = {
     Name    = "application_vpc_internet_gateway"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -285,7 +285,7 @@ resource "aws_vpc_peering_connection" "application_vpc_peering_rds_vpc" {
 
   tags = {
     Name    = "vpc_peering_between_application_and_rds"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -316,7 +316,7 @@ resource "aws_eip" "application_nat_eip" {
 
   tags = {
     Name    = "application_nat_gw_eip"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -327,7 +327,7 @@ resource "aws_nat_gateway" "application_nat_gw" {
 
   tags = {
     Name    = "NAT_gateway_in_application_public_1_subnet"
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 

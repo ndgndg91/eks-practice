@@ -36,7 +36,7 @@ resource "aws_iam_role" "eks_workshop_cluster" {
 POLICY
 
   tags = {
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -65,7 +65,7 @@ resource "aws_eks_cluster" "eks_workshop_cluster" {
   ]
 
   tags = {
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -94,7 +94,7 @@ resource "aws_iam_role" "eks_workshop_node" {
 }
 POLICY
   tags = {
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }
 
@@ -152,6 +152,6 @@ resource "aws_eks_node_group" "eks_workshop_node_group" {
   ]
 
   tags = {
-    "owned" = "donggil"
+    Owned = "donggil"
   }
 }

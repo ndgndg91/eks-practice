@@ -27,8 +27,8 @@ resource "aws_ecr_repository" "eks_workshop_seller_auth" {
     scan_on_push = true
   }
 
-  tags = {
-    owned = "donggil"
+    tags = {
+    Owned                                      = "donggil"
   }
 }
 
@@ -40,8 +40,8 @@ resource "aws_ecr_repository" "eks_workshop_buyer_auth" {
     scan_on_push = true
   }
 
-  tags = {
-    owned = "donggil"
+    tags = {
+    Owned                                      = "donggil"
   }
 }
 
@@ -53,8 +53,8 @@ resource "aws_ecr_repository" "eks_workshop_product" {
     scan_on_push = true
   }
 
-  tags = {
-    owned = "donggil"
+    tags = {
+    Owned                                      = "donggil"
   }
 }
 
@@ -66,8 +66,8 @@ resource "aws_ecr_repository" "eks_workshop_order" {
     scan_on_push = true
   }
 
-  tags = {
-    owned = "donggil"
+    tags = {
+    Owned                                      = "donggil"
   }
 }
 
@@ -79,7 +79,7 @@ resource "aws_ecr_repository" "eks_workshop_batch" {
     scan_on_push = true
   }
 
-  tags = {
-    owned = "donggil"
+    tags = {
+    Owned                                      = "donggil"
   }
 }

@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    region         = "ap-northeast-2"
-    bucket         = "donggil-terraform-state"
-    key            = "security-group/terraform.tfstate"
-    encrypt        = true
+    region  = "ap-northeast-2"
+    bucket  = "donggil-terraform-state"
+    key     = "security-group/terraform.tfstate"
+    encrypt = true
   }
 }
 
@@ -53,7 +53,8 @@ resource "aws_security_group" "application_public_subnet_security_group" {
   }
 
   tags = {
-    Name = "Public ALB Security Group"
+    Name  = "Public ALB Security Group"
+    Owned = "donggil"
   }
 }
 
@@ -63,9 +64,9 @@ resource "aws_security_group" "application_private_subnet_security_group" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.application_vpc_id
 
   ingress {
-    from_port   = local.all_port
-    protocol    = local.all_protocol
-    to_port     = local.all_port
+    from_port = local.all_port
+    protocol  = local.all_protocol
+    to_port   = local.all_port
     cidr_blocks = [
       data.terraform_remote_state.vpc.outputs.application_public_1_subnet_cidr_blocks,
       data.terraform_remote_state.vpc.outputs.application_public_2_subnet_cidr_blocks,
@@ -82,7 +83,8 @@ resource "aws_security_group" "application_private_subnet_security_group" {
   }
 
   tags = {
-    Name = "Private Instance Security Group"
+    Name  = "Private Instance Security Group"
+    Owned = "donggil"
   }
 }
 
@@ -92,9 +94,9 @@ resource "aws_security_group" "rds_private_subnet_security_group" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.rds_vpc_id
 
   ingress {
-    from_port   = local.mysql_port
-    protocol    = local.tcp_protocol
-    to_port     = local.mysql_port
+    from_port = local.mysql_port
+    protocol  = local.tcp_protocol
+    to_port   = local.mysql_port
     cidr_blocks = [
       data.terraform_remote_state.vpc.outputs.application_public_1_subnet_cidr_blocks,
       data.terraform_remote_state.vpc.outputs.application_public_2_subnet_cidr_blocks,
@@ -111,6 +113,7 @@ resource "aws_security_group" "rds_private_subnet_security_group" {
   }
 
   tags = {
-    Name = "RDS Security Group"
+    Name  = "RDS Security Group"
+    Owned = "donggil"
   }
 }

@@ -49,6 +49,10 @@ resource "aws_db_parameter_group" "auth" {
     name  = "time_zone"
     value = "Asia/Seoul"
   }
+
+  tags = {
+    Owned = "donggil"
+  }
 }
 
 resource "aws_db_subnet_group" "auth" {
@@ -59,6 +63,10 @@ resource "aws_db_subnet_group" "auth" {
     data.terraform_remote_state.vpc.outputs.rds_private_3_subnet_id,
   ]
   description = "authentication service rds subnet group"
+
+  tags = {
+    Owned = "donggil"
+  }
 }
 
 resource "aws_db_instance" "auth" {
@@ -75,6 +83,10 @@ resource "aws_db_instance" "auth" {
   vpc_security_group_ids = [
     data.terraform_remote_state.security_group.outputs.rds_private_security_group_id,
   ]
-  availability_zone    = data.terraform_remote_state.vpc.outputs.rds_private_1_subnet_availability_zone
-  skip_final_snapshot  = true
+  availability_zone   = data.terraform_remote_state.vpc.outputs.rds_private_1_subnet_availability_zone
+  skip_final_snapshot = true
+
+  tags = {
+    Owned = "donggil"
+  }
 }

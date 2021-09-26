@@ -17,3 +17,5 @@ destroy-apps:
 	cd application && kubectl delete -f buyer-auth-deployment.yaml
 	cd application && kubectl delete -f product-deployment.yaml
 	cd application && kubectl delete -f order-deployment.yaml
+destroy-namespace:
+	cd namespace && kubectl delete -f namespace.yaml
