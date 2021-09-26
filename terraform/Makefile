@@ -9,7 +9,7 @@ create-network: set-profile
 	cd prod/security-group && terraform init && terraform validate && terraform plan -var-file="prod.tfvars" -out plan.out
 	cd prod/security-group && terraform apply -auto-approve plan.out
 create-eks: set-profile
-	cd prod/eks && && terraform init && terraform validate && terraform plan -var-file="prod.tfvars" -out plan.out
+	cd prod/eks && terraform init && terraform validate && terraform plan -var-file="prod.tfvars" -out plan.out
 	cd prod/eks && terraform apply -auto-approve plan.out
 create-bastion: set-profile
 	cd prod/bastion && terraform init && terraform validate && terraform plan -var-file="prod.tfvars" -out plan.out
