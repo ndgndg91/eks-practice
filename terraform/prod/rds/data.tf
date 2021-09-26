@@ -25,10 +25,6 @@ data "terraform_remote_state" "secrets_manager" {
   }
 }
 
-data "aws_secretsmanager_secret_version" "seller_auth" {
-  secret_id = data.terraform_remote_state.secrets_manager.outputs.prod_seller_auth_name
-}
-
-data "aws_secretsmanager_secret_version" "reetest_admin_rds" {
-  secret_id = data.terraform_remote_state.secrets_manager.outputs.prod_buyer_auth_name
+data "aws_secretsmanager_secret_version" "auth" {
+  secret_id = data.terraform_remote_state.secrets_manager.outputs.prod_auth_name
 }

@@ -11,8 +11,8 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_db_parameter_group" "seller_auth" {
-  name   = "seller-auth-pg"
+resource "aws_db_parameter_group" "auth" {
+  name   = "auth-pg"
   family = "mysql5.7"
 
   parameter {
@@ -51,27 +51,27 @@ resource "aws_db_parameter_group" "seller_auth" {
   }
 }
 
-resource "aws_db_subnet_group" "seller_auth" {
+resource "aws_db_subnet_group" "auth" {
   name = "seller-auth-mysql-5-7"
   subnet_ids = [
     data.terraform_remote_state.vpc.outputs.rds_private_1_subnet_id,
     data.terraform_remote_state.vpc.outputs.rds_private_2_subnet_id,
     data.terraform_remote_state.vpc.outputs.rds_private_3_subnet_id,
   ]
-  description = "seller auth service rds subnet group"
+  description = "authentication service rds subnet group"
 }
 
-resource "aws_db_instance" "seller_auth" {
-  identifier           = "seller-auth"
+resource "aws_db_instance" "auth" {
+  identifier           = "auth"
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t3.micro"
-  name                 = "seller_auth"
-  username             = jsondecode(data.aws_secretsmanager_secret_version.seller_auth.secret_string).username
-  password             = jsondecode(data.aws_secretsmanager_secret_version.seller_auth.secret_string).password
-  parameter_group_name = aws_db_parameter_group.seller_auth.name
-  db_subnet_group_name = aws_db_subnet_group.seller_auth.name
+  name                 = "auth"
+  username             = jsondecode(data.aws_secretsmanager_secret_version.auth.secret_string).username
+  password             = jsondecode(data.aws_secretsmanager_secret_version.auth.secret_string).password
+  parameter_group_name = aws_db_parameter_group.auth.name
+  db_subnet_group_name = aws_db_subnet_group.auth.name
   vpc_security_group_ids = [
     data.terraform_remote_state.security_group.outputs.rds_private_security_group_id,
   ]

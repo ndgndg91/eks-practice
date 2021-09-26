@@ -2,8 +2,9 @@
 .terraform
 
 # terraform plan binary file
-plan.out
-plan
+**/plan.out
+**/plan
+**/plan.tfplan
 .git
 
 .gradle

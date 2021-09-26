@@ -12,53 +12,29 @@ provider "aws" {
 }
 
 locals {
-  secret_name_seller_auth = "prod/seller-auth/rds"
-  secret_name_buyer_auth  = "prod/buyer-auth/rds"
+  secret_name_auth = "eksworkshop/prod/auth/rds"
 }
 
 
-resource "aws_secretsmanager_secret" "prod_seller_auth" {
-  name = local.secret_name_seller_auth
+resource "aws_secretsmanager_secret" "prod_auth" {
+  name = local.secret_name_auth
 
   tags = {
-    owned = "donggil"
+    Owned = "donggil"
   }
 }
 
-resource "aws_secretsmanager_secret" "prod_buyer_auth" {
-  name = local.secret_name_buyer_auth
-
-  tags = {
-    owned = "donggil"
-  }
-}
-
-resource "random_password" "prod_seller_auth" {
+resource "random_password" "prod_auth" {
   length  = 16
   special = false
 }
 
-resource "random_password" "prod_buyer_auth" {
-  length  = 16
-  special = false
-}
-
-resource "aws_secretsmanager_secret_version" "prod_seller_auth" {
-  secret_id     = aws_secretsmanager_secret.prod_seller_auth.id
+resource "aws_secretsmanager_secret_version" "prod_auth" {
+  secret_id     = aws_secretsmanager_secret.prod_auth.id
   secret_string = <<EOF
    {
     "username": "admin",
-    "password": "${random_password.prod_seller_auth.result}"
-   }
-EOF
-}
-
-resource "aws_secretsmanager_secret_version" "prod_buyer_auth" {
-  secret_id     = aws_secretsmanager_secret.prod_buyer_auth.id
-  secret_string = <<EOF
-   {
-    "username": "admin",
-    "password": "${random_password.prod_buyer_auth.result}"
+    "password": "${random_password.prod_auth.result}"
    }
 EOF
 }
