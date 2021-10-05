@@ -14,11 +14,27 @@ spec:
         app.kubernetes.io/name: seller-auth
     spec:
       containers:
-      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.0.6
+      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.0.84
         imagePullPolicy: Always
         name: seller-auth
         ports:
         - containerPort: 1010
+        env:
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: url
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: password
 ---
 apiVersion: v1
 kind: Service

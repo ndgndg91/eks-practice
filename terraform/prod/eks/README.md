@@ -22,6 +22,15 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl get namespace
 </pre>
 
+- create secret
+- when creating new rds, change the secret value
+<pre>
+    kubectl apply -f auth-rds.yaml
+    kubectl get secret auth-rds -n eks-workshop --template={{.data.db_username}} | base64 -d 
+    kubectl get secret auth-rds -n eks-workshop --template={{.data.db_password}} | base64 -d 
+    kubectl get secret auth-rds -n eks-workshop --template={{.data.db_url}} | base64 -d 
+</pre>
+
 - deploy seller-auth pods
 <pre>
     kubectl apply -f seller-auth-deployment.yaml
