@@ -4,7 +4,10 @@ spring:
   application:
     name: seller-auth
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://auth.c69h4vuhfol4.ap-northeast-2.rds.amazonaws.com:3306/eks_workshop
+    username: admin
+    password: uG0B69kzt2k8vM3Q
+#    url: ${DB_URL}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
