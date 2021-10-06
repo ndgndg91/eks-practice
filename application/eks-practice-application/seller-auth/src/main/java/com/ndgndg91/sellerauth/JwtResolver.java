@@ -35,10 +35,9 @@ public class JwtResolver {
 
     public String issueAccessToken(
             final long id,
-            final Long storeId,
             final String userName
     ) {
-        Map<String, Object> claims = accessClaims(id, storeId, userName);
+        Map<String, Object> claims = accessClaims(id, userName);
         return issue(claims, accessTokenExpirationMinutes);
     }
 
@@ -51,13 +50,11 @@ public class JwtResolver {
 
     private Map<String, Object> accessClaims(
             final long id,
-            final Long storeId,
             final String userName
     ) {
         Map<String, Object> claims = new HashMap<>();
 
         claims.put("sellerId", id);
-        claims.put("storeId", storeId);
         claims.put("userName", userName);
         claims.put(IS_ACCESS, true);
 

@@ -1,10 +1,13 @@
 package com.ndgndg91.sellerauth.controller;
 
+import com.ndgndg91.sellerauth.ErrorCode;
 import com.ndgndg91.sellerauth.JwtResolver;
+import com.ndgndg91.sellerauth.ServiceException;
 import com.ndgndg91.sellerauth.controller.request.LoginRequest;
 import com.ndgndg91.sellerauth.controller.response.LoginResponse;
 import com.ndgndg91.sellerauth.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +21,14 @@ public class AuthController {
 
     private final JwtResolver jwtResolver;
 
-    @PostMapping("/seller-auth/sellers/login")
+    @PostMapping("/sellers/login")
     public ResponseEntity<LoginResponse> login(@RequestBody final LoginRequest request) {
-        final var seller = sellerRepository.login(request.getIdentifier(), request.getPassword())
-                .orElseThrow();
+        final var seller = sellerRepository.findByIdentifier(request.getIdentifier())
+                .orElseThrow(() -> new ServiceException(HttpStatus.NOT_FOUND.value(), ErrorCode.ESP1404));
+        seller.checkPassword(request.getPassword());
 
         final var refreshToken = jwtResolver.issueRefreshToken(seller.getId());
-        final var accessToken = jwtResolver.issueAccessToken(seller.getId(), seller.firstStoreId(), seller.getFullName());
+        final var accessToken = jwtResolver.issueAccessToken(seller.getId(), seller.getFullName());
 
         return ResponseEntity.ok(new LoginResponse(accessToken, refreshToken));
     }
