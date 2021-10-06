@@ -7,14 +7,15 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: seller-auth
-  replicas: 2
+  replicas: 1
+  revisionHistoryLimit: 10
   template:
     metadata:
       labels:
         app.kubernetes.io/name: seller-auth
     spec:
       containers:
-      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.0.84
+      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.0.93
         imagePullPolicy: Always
         name: seller-auth
         ports:

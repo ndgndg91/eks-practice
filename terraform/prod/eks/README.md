@@ -73,7 +73,27 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl apply -f ingress.yaml
 </pre>
 
-
 ### urls
 - https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/rbac-role.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/iam-policy.json
+
+- rollout history, status
+<pre>
+    kubectl rollout history deployment seller-auth -n eks-workshop
+    kubectl rollout history deployment buyer-auth -n eks-workshop
+    kubectl rollout history deployment product -n eks-workshop
+    kubectl rollout history deployment order -n eks-workshop
+
+    kubectl rollout status deployment seller-auth -n eks-workshop
+    kubectl rollout status deployment buyer-auth -n eks-workshop
+    kubectl rollout status deployment product -n eks-workshop
+    kubectl rollout status deployment order -n eks-workshop
+</pre>
+
+- describe deployment
+<pre>
+    kubectl describe deployment seller-auth -n eks-workshop
+    kubectl describe deployment buyer-auth -n eks-workshop
+    kubectl describe deployment product -n eks-workshop
+    kubectl describe deployment order -n eks-workshop
+</pre>

@@ -13,28 +13,28 @@ spec:
   rules:
   - http:
       paths:
-      - path: /seller-auth
+      - path: /sellers*
         pathType: Prefix
         backend:
           service:
             name: service-seller-auth
             port:
               number: 1010
-      - path: /buyer-auth
+      - path: /buyer-auth*
         pathType: Prefix
         backend:
           service:
             name: service-buyer-auth
             port: 
               number: 2020
-      - path: /product
+      - path: /product*
         pathType: Prefix
         backend:
           service:
             name: service-product
             port: 
               number: 3030
-      - path: /order
+      - path: /order*
         pathType: Prefix
         backend:
           service:

@@ -30,3 +30,8 @@ destroy-security: set-profile
 destroy-vpc: set-profile
 	cd prod/vpc && terraform destroy -var-file="prod.tfvars" -auto-approve
 destroy-network: set-profile destroy-security destroy-vpc
+
+
+create-one-step: create-network create-bastion create-rds create-eks
+destroy-one-step: destroy-bastion destroy-rds destroy-eks destroy-network
+	

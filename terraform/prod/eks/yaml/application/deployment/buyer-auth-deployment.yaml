@@ -14,7 +14,7 @@ spec:
         app.kubernetes.io/name: buyer-auth
     spec:
       containers:
-      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-buyer-auth:v1.0.6
+      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-buyer-auth:v1.0.9
         imagePullPolicy: Always
         name: buyer-auth
         ports:
