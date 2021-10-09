@@ -1,8 +1,8 @@
 package com.ndgndg91.sellerauth.controller;
 
-import com.ndgndg91.sellerauth.ErrorCode;
-import com.ndgndg91.sellerauth.JwtResolver;
-import com.ndgndg91.sellerauth.ServiceException;
+import com.ndgndg91.sellerauth.global.ErrorCode;
+import com.ndgndg91.sellerauth.global.JwtResolver;
+import com.ndgndg91.sellerauth.global.ServiceException;
 import com.ndgndg91.sellerauth.controller.request.LoginRequest;
 import com.ndgndg91.sellerauth.controller.response.LoginResponse;
 import com.ndgndg91.sellerauth.repository.SellerRepository;

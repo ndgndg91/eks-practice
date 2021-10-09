@@ -1,7 +1,7 @@
 package com.ndgndg91.sellerauth.domain;
 
-import com.ndgndg91.sellerauth.ErrorCode;
-import com.ndgndg91.sellerauth.ServiceException;
+import com.ndgndg91.sellerauth.global.ErrorCode;
+import com.ndgndg91.sellerauth.global.ServiceException;
 import com.ndgndg91.sellerauth.domain.vo.Agreement;
 import com.ndgndg91.sellerauth.domain.vo.Birthday;
 import com.ndgndg91.sellerauth.domain.vo.CellPhone;

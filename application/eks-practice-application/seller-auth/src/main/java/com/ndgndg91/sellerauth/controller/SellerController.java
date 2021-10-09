@@ -1,13 +1,12 @@
 package com.ndgndg91.sellerauth.controller;
 
-import static com.ndgndg91.sellerauth.ApiResult.body;
+import static com.ndgndg91.sellerauth.global.ApiResult.body;
 
-import com.ndgndg91.sellerauth.ApiResult;
-import com.ndgndg91.sellerauth.ErrorCode;
-import com.ndgndg91.sellerauth.ServiceException;
+import com.ndgndg91.sellerauth.global.ApiResult;
+import com.ndgndg91.sellerauth.global.ErrorCode;
+import com.ndgndg91.sellerauth.global.ServiceException;
 import com.ndgndg91.sellerauth.controller.request.CreateSellerRequest;
 import com.ndgndg91.sellerauth.controller.response.SellerResponse;
-import com.ndgndg91.sellerauth.domain.Seller;
 import com.ndgndg91.sellerauth.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

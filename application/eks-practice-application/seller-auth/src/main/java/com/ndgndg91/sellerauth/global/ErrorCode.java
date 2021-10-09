@@ -1,4 +1,4 @@
-package com.ndgndg91.sellerauth;
+package com.ndgndg91.sellerauth.global;
 
 import lombok.AccessLevel;
 import lombok.Getter;

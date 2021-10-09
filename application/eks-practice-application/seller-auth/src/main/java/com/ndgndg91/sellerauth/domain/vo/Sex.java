@@ -1,7 +1,7 @@
 package com.ndgndg91.sellerauth.domain.vo;
 
-import com.ndgndg91.sellerauth.ErrorCode;
-import com.ndgndg91.sellerauth.ServiceException;
+import com.ndgndg91.sellerauth.global.ErrorCode;
+import com.ndgndg91.sellerauth.global.ServiceException;
 import java.util.Arrays;
 
 public enum Sex {

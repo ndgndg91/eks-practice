@@ -1,4 +1,4 @@
-package com.ndgndg91.sellerauth;
+package com.ndgndg91.sellerauth.global;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

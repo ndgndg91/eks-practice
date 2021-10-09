@@ -1,4 +1,4 @@
-package com.ndgndg91.sellerauth;
+package com.ndgndg91.sellerauth.global;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

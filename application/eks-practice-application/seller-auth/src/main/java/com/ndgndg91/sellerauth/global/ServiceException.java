@@ -1,4 +1,4 @@
-package com.ndgndg91.sellerauth;
+package com.ndgndg91.sellerauth.global;
 
 public class ServiceException extends RuntimeException{
     private final int statusCode;
