@@ -5,6 +5,7 @@ import com.amazonaws.xray.AWSXRayRecorderBuilder;
 import com.amazonaws.xray.config.DaemonConfiguration;
 import com.amazonaws.xray.emitters.Emitter;
 import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
+import com.amazonaws.xray.strategy.FixedSegmentNamingStrategy;
 import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,6 @@ public class XRayConfiguration {
         final var emitter = Emitter.create(daemonConfiguration);
         AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withEmitter(emitter);
         final AWSXRayRecorder recorder = builder.build();
-        return new AWSXRayServletFilter(null, recorder);
+        return new AWSXRayServletFilter(new FixedSegmentNamingStrategy("SellerApplication"), recorder);
     }
 }
