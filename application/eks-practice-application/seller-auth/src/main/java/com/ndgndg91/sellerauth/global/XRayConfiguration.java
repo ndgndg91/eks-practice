@@ -1,30 +1,24 @@
 package com.ndgndg91.sellerauth.global;
 
-import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.AWSXRayRecorder;
 import com.amazonaws.xray.AWSXRayRecorderBuilder;
+import com.amazonaws.xray.config.DaemonConfiguration;
+import com.amazonaws.xray.emitters.Emitter;
 import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
-import com.amazonaws.xray.plugins.EC2Plugin;
-import com.amazonaws.xray.plugins.EKSPlugin;
-import com.amazonaws.xray.strategy.DefaultStreamingStrategy;
-import javax.annotation.PostConstruct;
+import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class XRayConfiguration {
 
-    @PostConstruct
-    public void init() {
-        AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withPlugin(new EC2Plugin()).withPlugin(new EKSPlugin("eks-workshop-cluster"));
-        builder.withStreamingStrategy(new DefaultStreamingStrategy(30));
-        AWSXRayRecorder globalRecorder = builder.build();
-        AWSXRay.setGlobalRecorder(globalRecorder);
-    }
-
     @Bean
-    public AWSXRayServletFilter awsxRayServletFilter(){
-        return new AWSXRayServletFilter("SellerApplication");
+    public AWSXRayServletFilter awsxRayServletFilter() throws IOException {
+        final var daemonConfiguration = new DaemonConfiguration();
+        daemonConfiguration.setUDPAddress("xray-service:2000");
+        final var emitter = Emitter.create(daemonConfiguration);
+        AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withEmitter(emitter);
+        final AWSXRayRecorder recorder = builder.build();
+        return new AWSXRayServletFilter(null, recorder);
     }
-
 }
