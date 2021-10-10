@@ -23,3 +23,6 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     #    root: DEBUG
     web: DEBUG
+aws:
+  xray:
+    daemon-address: xray-service:2000

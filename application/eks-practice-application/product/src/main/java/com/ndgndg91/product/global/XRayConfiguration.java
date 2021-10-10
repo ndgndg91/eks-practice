@@ -1,4 +1,4 @@
-package com.ndgndg91.sellerauth.global;
+package com.ndgndg91.product.global;
 
 import com.amazonaws.xray.AWSXRayRecorder;
 import com.amazonaws.xray.AWSXRayRecorderBuilder;

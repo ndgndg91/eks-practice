@@ -27,6 +27,7 @@ jar {
 }
 
 dependencies {
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.9.1'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'

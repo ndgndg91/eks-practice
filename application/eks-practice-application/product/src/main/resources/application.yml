@@ -3,3 +3,6 @@ server:
 spring:
   application:
     name: product
+aws:
+  xray:
+    daemon-address: xray-service:2000
