@@ -20,6 +20,7 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
 <pre>
     kubectl apply -f namespace.yaml
     kubectl get namespace
+    kubectl config set-context --current --namespace=eks-workshop
 </pre>
 
 - create secret
@@ -32,6 +33,9 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
 </pre>
 
 - deploy seller-auth pods
+<pre>
+    System Manager 의 Session Manager 를 통해서 RDS 의  eks_workshop database 와 seller table 을 생성해주어야 한다.
+</pre>
 <pre>
     kubectl apply -f seller-auth-deployment.yaml
     kubectl get pod -n eks-workshop
@@ -66,7 +70,6 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     ingress.yaml 을 통해서 ingress 를 생성하기 전에 각각 NodePort Service 에 매핑된 Port Number 로 변경해주어야 한다.
 </pre>
 <pre>
-    eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=eks-workshop-cluster --approve
     kubectl apply -f rbac-role-alb-ingress-controller.yaml
     kubectl apply -f ingress-controller-deployment.yaml    
     kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o 'aws-load-balancer-controller[a-zA-Z0-9-]+')
@@ -96,4 +99,9 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl describe deployment buyer-auth -n eks-workshop
     kubectl describe deployment product -n eks-workshop
     kubectl describe deployment order -n eks-workshop
+</pre>
+
+- x-ray ( https://www.eksworkshop.com/intermediate/245_x-ray/ )
+<pre>
+    sh xray/init.sh
 </pre>
