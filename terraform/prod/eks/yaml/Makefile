@@ -3,6 +3,7 @@ init:
 	eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=eks-workshop-cluster --approve	
 create-namespace:
 	cd namespace && kubectl apply -f namespace.yaml
+	kubectl config set-context --current --namespace=eks-workshop
 create-secrets:
 	cd application/secret && kubectl apply -f auth-rds.yaml
 deploy-xray-daemonset:
@@ -15,14 +16,14 @@ deploy-apps: create-namespace
 deploy-ingress:
 	cd ingress && kubectl apply -f rbac-role-alb-ingress-controller.yaml
 	cd ingress && kubectl apply -f ingress-controller-deployment.yaml
-	sleep 5
+	sleep 10
 	cd ingress && kubectl apply -f ingress.yaml
 	
 	
 destroy-ingress:
 	cd ingress && kubectl delete -f ingress.yaml
+	sleep 60
 	cd ingress && kubectl delete -f ingress-controller-deployment.yaml
-	sleep 30
 	cd ingress && kubectl delete -f rbac-role-alb-ingress-controller.yaml
 destroy-xray-daemonset:
 	cd xray && sh clean.sh

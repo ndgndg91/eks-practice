@@ -15,7 +15,7 @@ spec:
         app.kubernetes.io/name: seller-auth
     spec:
       containers:
-      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.0.98
+      - image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth:v1.1.1
         imagePullPolicy: Always
         name: seller-auth
         ports:
