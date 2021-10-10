@@ -24,6 +24,6 @@ public class XRayConfiguration {
         final var emitter = Emitter.create(daemonConfiguration);
         AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard().withEmitter(emitter);
         final AWSXRayRecorder recorder = builder.build();
-        return new AWSXRayServletFilter(SegmentNamingStrategy.fixed("SellerApplication"), recorder);
+        return new AWSXRayServletFilter(SegmentNamingStrategy.fixed("ProductApplication"), recorder);
     }
 }
