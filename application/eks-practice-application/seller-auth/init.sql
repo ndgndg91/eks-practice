@@ -1,4 +1,5 @@
 CREATE DATABASE eks_workshop;
+USE eks_workshop;
 
 CREATE TABLE `seller`
 (

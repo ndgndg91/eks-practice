@@ -6,3 +6,7 @@ spring:
 aws:
   xray:
     daemon-address: xray-service:2000
+logging:
+  level:
+    #    root: DEBUG
+    web: DEBUG
