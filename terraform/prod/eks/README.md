@@ -24,6 +24,7 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
 
 - helm chart
 <pre>
+    cd terraform/prod/eks/yaml
     helm create workshop
     cd workshop
 
@@ -43,19 +44,19 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     
     # create subfolders for each template type
     mkdir -p templates/deployment
-    cp ../yaml/application/deployment/product-deployment.yaml /templates/deployment/product-deployment.yaml 
-    cp ../yaml/application/deployment/order-deployment.yaml /templates/deployment/order-deployment.yaml 
-    cp ../yaml/application/deployment/seller-auth-deployment.yaml /templates/deployment/seller-auth-deployment.yaml                                                                                                                                                                       
-    cp ../yaml/application/deployment/buyer-auth-deployment.yaml /templates/deployment/buyer-auth-deployment.yaml
+    cp terraform/prod/eks/yaml/application/deployment/product-deployment.yaml terraform/prod/eks/yaml/helm/workshop/templates/deployment/product-deployment.yaml 
+    cp terraform/prod/eks/yaml/application/deployment/order-deployment.yaml terraform/prod/eks/yaml/helm/workshop/templates/deployment/order-deployment.yaml 
+    cp terraform/prod/eks/yaml/application/deployment/seller-auth-deployment.yaml terraform/prod/eks/yaml/helm/workshop/templates/deployment/seller-auth-deployment.yaml                                                                                                                                                                       
+    cp terraform/prod/eks/yaml/application/deployment/buyer-auth-deployment.yaml terraform/prod/eks/yaml/helm/workshop/templates/deployment/buyer-auth-deployment.yaml
     
     
     
     # replace hard-coded values with template directives
     replicas: {{ .Values.replicas }}
-    - image: {{ .Values.buyer.image }}:{{ .Values.version }} in templates/deployment/buyer-auth-deployment.yaml
-    - image: {{ .Values.seller.image }}:{{ .Values.version }} in templates/deployment/seller-auth-deployment.yaml
-    - image: {{ .Values.product.image }}:{{ .Values.version }} in templates/deployment/product-deployment.yaml
-    - image: {{ .Values.order.image }}:{{ .Values.version }} in templates/deployment/order-deployment.yaml
+    - image: {{ .Values.buyer.image }}:{{ .Values.version }} in terraform/prod/eks/yaml/helm/workshop/templates/deployment/buyer-auth-deployment.yaml
+    - image: {{ .Values.seller.image }}:{{ .Values.version }} in terraform/prod/eks/yaml/helm/workshop/templates/deployment/seller-auth-deployment.yaml
+    - image: {{ .Values.product.image }}:{{ .Values.version }} in terraform/prod/eks/yaml/helm/workshop/templates/deployment/product-deployment.yaml
+    - image: {{ .Values.order.image }}:{{ .Values.version }} in terraform/prod/eks/yaml/helm/workshop/templates/deployment/order-deployment.yaml
     
     # create values.yaml
     cat <<EoF > ~/environment/eksdemo/values.yaml
@@ -83,6 +84,15 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     
     # apply template to eks cluster
     helm install --debug workshop ./workshop
+    
+    helm status workshop
+    helm history workshop
+    
+    # Rolling update - after modify values.yaml
+    helm upgrade workshop ./workshop
+    
+    # clean
+    helm uninstall workshop
 </pre>
 
 - create namespace
