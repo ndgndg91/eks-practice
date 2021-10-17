@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: eks-workshop
+  name: seller-auth
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: seller-auth
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: seller-auth
+    spec:
+      containers:
+      - image: {{ .Values.seller.image }}:{{ .Values.version }}
+        imagePullPolicy: Always
+        name: seller-auth
+        ports:
+        - containerPort: 1010
+        env:
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: url
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: auth-rds
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: eks-workshop
+  name: service-seller-auth
+spec:
+  ports:
+    - port: 1010
+      targetPort: 1010
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: seller-auth

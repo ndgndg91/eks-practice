@@ -1,0 +1,5 @@
+apiVersion: v2
+name: workshop
+description: A Helm chart for EKS Workshop MSA application
+version: 0.1.0
+appVersion: 1.0

@@ -1,0 +1,17 @@
+# Default values for workshop.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Release-wide Values
+replicas: 1
+version: 'v1.1.1'
+
+# Service Specific Values
+buyer:
+    image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-buyer-auth
+seller:
+    image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth
+order:
+    image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-order
+product:
+    image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-product

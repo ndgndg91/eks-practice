@@ -1,6 +1,12 @@
 - install kubectl
 https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/install-kubectl.html
 
+- install helm
+<pre>
+    curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    helm version --short
+</pre>
+
 - update kubeconfig for using kubectl
 https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
 <pre>
@@ -14,6 +20,69 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl get node
     kubectl get pod
     kubectl get namespace
+</pre>
+
+- helm chart
+<pre>
+    helm create workshop
+    cd workshop
+
+    # delete boilerplate files
+    rm values.yaml
+    rm -rf templates/
+    rm Chart.yaml
+
+    # create Chart.yaml file
+    cat <<EoF > Chart.yaml
+    apiVersion: v2
+    name: eksdemo
+    description: A Helm chart for EKS Workshop Microservices application
+    version: 0.1.0
+    appVersion: 1.0
+    EoF
+    
+    # create subfolders for each template type
+    mkdir -p templates/deployment
+    cp ../yaml/application/deployment/product-deployment.yaml /templates/deployment/product-deployment.yaml 
+    cp ../yaml/application/deployment/order-deployment.yaml /templates/deployment/order-deployment.yaml 
+    cp ../yaml/application/deployment/seller-auth-deployment.yaml /templates/deployment/seller-auth-deployment.yaml                                                                                                                                                                       
+    cp ../yaml/application/deployment/buyer-auth-deployment.yaml /templates/deployment/buyer-auth-deployment.yaml
+    
+    
+    
+    # replace hard-coded values with template directives
+    replicas: {{ .Values.replicas }}
+    - image: {{ .Values.buyer.image }}:{{ .Values.version }} in templates/deployment/buyer-auth-deployment.yaml
+    - image: {{ .Values.seller.image }}:{{ .Values.version }} in templates/deployment/seller-auth-deployment.yaml
+    - image: {{ .Values.product.image }}:{{ .Values.version }} in templates/deployment/product-deployment.yaml
+    - image: {{ .Values.order.image }}:{{ .Values.version }} in templates/deployment/order-deployment.yaml
+    
+    # create values.yaml
+    cat <<EoF > ~/environment/eksdemo/values.yaml
+    # Default values for workshop.
+    # This is a YAML-formatted file.
+    # Declare variables to be passed into your templates.
+
+    # Release-wide Values
+    replicas: 1
+    version: 'v1.1.1'
+
+    # Service Specific Values
+    buyer:
+        image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-buyer-auth
+    seller:
+        image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-seller-auth
+    order:
+        image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-order
+    product:
+        image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-product
+    EoF
+    
+    # test template with dry-run option
+    helm install --debug --dry-run workshop ./workshop
+    
+    # apply template to eks cluster
+    helm install --debug workshop ./workshop
 </pre>
 
 - create namespace
