@@ -39,7 +39,7 @@ spec:
         - --cluster-name=eks-workshop-cluster
         # AWS VPC ID this ingress controller will use to create AWS resources.
         # If unspecified, it will be discovered from ec2metadata.
-        - --aws-vpc-id=vpc-005fa52f7debee670
+        - --aws-vpc-id=vpc-05ea2b8b67064e3d0
         # AWS region this ingress controller will operate in.
         # If unspecified, it will be discovered from ec2metadata.
         # List of regions: http://docs.aws.amazon.com/general/latest/gr/rande.html#vpc_region

@@ -22,6 +22,21 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     kubectl get namespace
 </pre>
 
+- helm add stable repo and search and install kube-ops-view
+<pre>
+    # helm add stable repo
+    helm repo add stable https://charts.helm.sh/stable
+    # search
+    helm search repo stable
+    # install
+    helm install kube-ops-view \
+    stable/kube-ops-view \
+    --set service.type=LoadBalancer \
+    --set rbac.create=True
+    # svc url
+     kubectl get svc kube-ops-view | tail -n 1 | awk '{ print "Kube-ops-view URL = http://"$4 }'
+</pre>
+
 - helm chart
 <pre>
     cd terraform/prod/eks/yaml

@@ -9,9 +9,9 @@ create-secrets:
 deploy-xray-daemonset:
 	cd xray && sh init.sh
 deploy-apps: 
-	helm install --debug workshop ./workshop
-	helm status workshop
-	helm history workshop
+	cd helm && helm install --debug workshop ./workshop
+	cd helm && helm status workshop
+	cd helm && helm history workshop
 deploy-ingress:
 	cd ingress && kubectl apply -f rbac-role-alb-ingress-controller.yaml
 	cd ingress && kubectl apply -f ingress-controller-deployment.yaml
@@ -27,10 +27,7 @@ destroy-ingress:
 destroy-xray-daemonset:
 	cd xray && sh clean.sh
 destroy-apps:
-	cd application/deployment && kubectl delete -f seller-auth-deployment.yaml
-	cd application/deployment && kubectl delete -f buyer-auth-deployment.yaml
-	cd application/deployment && kubectl delete -f product-deployment.yaml
-	cd application/deployment && kubectl delete -f order-deployment.yaml
+	cd helm && helm uninstall --debug workshop
 destroy-secrets:
 	cd application/secret && kubectl delete -f auth-rds.yaml
 destroy-namespace:
