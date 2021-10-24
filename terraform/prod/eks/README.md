@@ -110,11 +110,22 @@ https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
     helm uninstall workshop
 </pre>
 
+- deploy the metric server
+<pre>
+    kubectl apply -f metric-server.yaml
+</pre>
+
 - create namespace
 <pre>
     kubectl apply -f namespace.yaml
     kubectl get namespace
     kubectl config set-context --current --namespace=eks-workshop
+    kubectl get resourcequota
+    # 모든 컨테이너에는 메모리 요청량(request), 메모리 상한(limit), CPU 요청량 및 CPU 상한이 있어야 한다.
+    # 모든 컨테이너에 대한 총 메모리 요청량은 1GiB를 초과하지 않아야 한다.
+    # 모든 컨테이너에 대한 총 메모리 상한은 2GiB를 초과하지 않아야 한다.
+    # 모든 컨테이너에 대한 총 CPU 요청량은 1 cpu를 초과해서는 안된다.
+    # 모든 컨테이너에 대한 총 CPU 상한은 2 cpu를 초과해서는 안된다.
 </pre>
 
 - create secret

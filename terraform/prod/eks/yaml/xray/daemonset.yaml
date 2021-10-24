@@ -55,6 +55,10 @@ spec:
         command: [ "/usr/bin/xray", "-c", "/aws/xray/config.yaml" ]
         resources:
           limits:
+            cpu: 100m
+            memory: 24Mi
+          requests:
+            cpu: 100m
             memory: 24Mi
         ports:
         - name: xray-ingest

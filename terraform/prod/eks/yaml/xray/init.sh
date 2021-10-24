@@ -2,5 +2,5 @@ eksctl create iamserviceaccount --name xray-daemon --namespace eks-workshop --cl
 kubectl label serviceaccount xray-daemon app=xray-daemon -n eks-workshop
 kubectl create -f daemonset.yaml
 kubectl describe daemonset xray-daemon -n eks-workshop
-sleep 5
+sleep 15
 kubectl logs -l app=xray-daemon -n eks-workshop

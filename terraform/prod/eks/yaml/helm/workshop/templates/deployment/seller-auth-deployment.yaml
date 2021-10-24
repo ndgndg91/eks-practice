@@ -20,6 +20,13 @@ spec:
         name: seller-auth
         ports:
         - containerPort: 1010
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
+          requests:
+            memory: "512Mi"
+            cpu: "256m"
         env:
         - name: DB_URL
           valueFrom:

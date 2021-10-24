@@ -1,8 +1,15 @@
 init:
 	aws eks --region ap-northeast-2 update-kubeconfig --name eks-workshop-cluster
 	eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=eks-workshop-cluster --approve	
+deploy-kube-ops-view:
+	helm install kube-ops-view stable/kube-ops-view --set service.type=LoadBalancer --set rbac.create=True
+	kubectl get svc kube-ops-view | tail -n 1 | awk '{ print "Kube-ops-view URL = http://"$4 }'
+	helm ls --all-namespaces
+deploy-metric-server:
+	cd hpa && kubectl apply -f metric-server.yaml
+	kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
 create-namespace:
-	cd namespace && kubectl apply -f namespace.yaml
+	cd namespace && kubectl apply -f eks-workshop.yaml
 	kubectl config set-context --current --namespace=eks-workshop
 create-secrets:
 	cd application/secret && kubectl apply -f auth-rds.yaml
@@ -19,6 +26,10 @@ deploy-ingress:
 	cd ingress && kubectl apply -f ingress.yaml
 	
 	
+destroy-kube-ops-view:
+	helm uninstall kube-ops-view -n default
+destroy-metric-server:
+	cd hpa && kubectl delete -f metric-server.yaml
 destroy-ingress:
 	cd ingress && kubectl delete -f ingress.yaml
 	sleep 120
@@ -31,4 +42,4 @@ destroy-apps:
 destroy-secrets:
 	cd application/secret && kubectl delete -f auth-rds.yaml
 destroy-namespace:
-	cd namespace && kubectl delete -f namespace.yaml
+	cd namespace && kubectl delete -f eks-workshop.yaml

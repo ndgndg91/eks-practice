@@ -19,6 +19,13 @@ spec:
         name: product
         ports:
         - containerPort: 3030
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
+          requests:
+            memory: "512Mi"
+            cpu: "256m"
 ---
 apiVersion: v1
 kind: Service
