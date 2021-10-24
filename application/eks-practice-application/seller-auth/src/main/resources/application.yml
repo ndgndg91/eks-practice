@@ -26,3 +26,8 @@ logging:
 aws:
   xray:
     daemon-address: xray-service:2000
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true

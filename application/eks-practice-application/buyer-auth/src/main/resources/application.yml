@@ -10,3 +10,8 @@ logging:
   level:
     #    root: DEBUG
     web: DEBUG
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
