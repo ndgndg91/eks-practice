@@ -10,7 +10,11 @@ public class OrderController {
 
     @GetMapping("/order")
     public ResponseEntity<String> ok() {
-        return ResponseEntity.ok("ok order application");
+        var x = 0.0001;
+        for (var i = 0; i <= 1000000; i++) {
+            x += Math.sqrt(x);
+        }
+        return ResponseEntity.ok("ok order application" + x);
     }
     
     @GetMapping("/order/{name}")
