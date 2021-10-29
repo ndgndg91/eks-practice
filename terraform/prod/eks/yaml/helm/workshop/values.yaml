@@ -4,7 +4,7 @@
 
 # Release-wide Values
 replicas: 1
-version: 'v1.1.12'
+version: 'v1.1.13'
 
 # Service Specific Values
 buyer:

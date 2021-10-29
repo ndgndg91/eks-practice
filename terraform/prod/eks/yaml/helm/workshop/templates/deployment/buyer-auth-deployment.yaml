@@ -26,6 +26,24 @@ spec:
           requests:
             memory: "512Mi"
             cpu: "256m"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 2020
+          initialDelaySeconds: 45
+          periodSeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 2020
+          initialDelaySeconds: 45
+          periodSeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+          successThreshold: 1
 ---
 apiVersion: v1
 kind: Service

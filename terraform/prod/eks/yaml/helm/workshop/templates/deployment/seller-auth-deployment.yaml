@@ -22,11 +22,29 @@ spec:
         - containerPort: 1010
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "256m"
+            memory: "1024Mi"
+            cpu: "512m"
           requests:
             memory: "512Mi"
             cpu: "256m"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 1010
+          initialDelaySeconds: 45
+          periodSeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 1010
+          initialDelaySeconds: 45
+          periodSeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+          successThreshold: 1
         env:
         - name: DB_URL
           valueFrom:
