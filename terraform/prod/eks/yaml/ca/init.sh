@@ -6,11 +6,17 @@ echo "end create k8s-asg-policy"
 
 echo "start create iamserviceaccount"
 AWS_ACCOUNT=`aws sts get-caller-identity --output text --query 'Account'`
+echo $AWS_ACCOUNT
+echo ${AWS_ACCOUNT}
+POLICY_ARN="arn:aws:iam::"
+POLICY_ARN+=$AWS_ACCOUNT
+POLICY_ARN+=":policy/k8s-asg-policy"
+echo $POLICY_ARN
 eksctl create iamserviceaccount \
     --name cluster-autoscaler \
     --namespace kube-system \
     --cluster eks-workshop-cluster \
-    --attach-policy-arn "arn:aws:iam::$AWS_ACCOOUNT:policy/k8s-asg-policy" \
+    --attach-policy-arn $POLICY_ARN \
     --approve \
     --override-existing-serviceaccounts
 echo "end create iamserviceaccount"
