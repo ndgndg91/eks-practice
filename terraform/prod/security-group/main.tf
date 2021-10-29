@@ -100,8 +100,10 @@ resource "aws_security_group" "rds_private_subnet_security_group" {
     cidr_blocks = [
       data.terraform_remote_state.vpc.outputs.application_public_1_subnet_cidr_blocks,
       data.terraform_remote_state.vpc.outputs.application_public_2_subnet_cidr_blocks,
+      data.terraform_remote_state.vpc.outputs.application_public_3_subnet_cidr_blocks,
       data.terraform_remote_state.vpc.outputs.application_private_1_subnet_cidr_blocks,
       data.terraform_remote_state.vpc.outputs.application_private_2_subnet_cidr_blocks,
+      data.terraform_remote_state.vpc.outputs.application_private_3_subnet_cidr_blocks,
     ]
   }
 

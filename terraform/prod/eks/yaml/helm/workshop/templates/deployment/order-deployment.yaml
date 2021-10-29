@@ -21,11 +21,11 @@ spec:
         - containerPort: 4040
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "256m"
+            memory: "800Mi"
+            cpu: "400m"
           requests:
-            memory: "512Mi"
-            cpu: "256m"
+            memory: "800Mi"
+            cpu: "400m"
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
