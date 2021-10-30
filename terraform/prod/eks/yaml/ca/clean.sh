@@ -1,5 +1,5 @@
 echo "start delete ca"
-kubectl delete -f https://www.eksworkshop.com/beginner/080_scaling/deploy_ca.files/cluster-autoscaler-autodiscover.yaml
+kubectl delete -f ca.yaml
 echo "end delete ca"
 
 echo "start delete iamserviceaccount"

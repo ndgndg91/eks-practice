@@ -26,7 +26,7 @@ kubectl -n kube-system describe sa cluster-autoscaler
 echo "end describe cluster-autoscaler serviceaccount"
 
 echo "start deploy ca"
-kubectl apply -f https://www.eksworkshop.com/beginner/080_scaling/deploy_ca.files/cluster-autoscaler-autodiscover.yaml
+kubectl apply -f ca.yaml
 echo "end deploy ca"
 
 echo "start annotate safe-to-evict=false"
