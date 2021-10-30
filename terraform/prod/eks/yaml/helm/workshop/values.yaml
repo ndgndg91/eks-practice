@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 # Release-wide Values
-replicas: 1
+replicas: 10
 version: 'v1.1.13'
 
 # Service Specific Values

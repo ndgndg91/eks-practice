@@ -29,7 +29,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
-          port: 4040
+            port: 4040
           initialDelaySeconds: 45
           periodSeconds: 3
           timeoutSeconds: 2
@@ -38,7 +38,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
-          port: 4040
+            port: 4040
           initialDelaySeconds: 45
           periodSeconds: 3
           timeoutSeconds: 2

@@ -152,6 +152,8 @@ resource "aws_eks_node_group" "eks_workshop_node_group" {
   ]
 
   tags = {
-    Owned = "donggil"
+    Owned                                                                    = "donggil"
+    "k8s.io/cluster-autoscaler/${aws_eks_cluster.eks_workshop_cluster.name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"                                      = "TRUE"
   }
 }
