@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: seller-auth
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.seller.replicas }}
   revisionHistoryLimit: 10
   template:
     metadata:

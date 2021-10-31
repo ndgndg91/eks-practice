@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: order
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.order.replicas }}
   template:
     metadata:
       labels:
@@ -70,4 +70,4 @@ spec:
     name: order
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: 10
+  targetCPUUtilizationPercentage: 35

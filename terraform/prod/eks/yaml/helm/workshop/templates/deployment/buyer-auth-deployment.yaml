@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: buyer-auth
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.buyer.replicas }}
   template:
     metadata:
       labels:
