@@ -43,5 +43,5 @@ kubectl -n kube-system \
     cluster-autoscaler=us.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v${AUTOSCALER_VERSION}
 echo "end replace latest image"
 
-sleep 30
-kubectl -n kube-system logs -f deployment/cluster-autoscaler
+# sleep 30
+# kubectl -n kube-system logs -f deployment/cluster-autoscaler
