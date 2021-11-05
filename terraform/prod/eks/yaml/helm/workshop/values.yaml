@@ -19,6 +19,6 @@ product:
     image: 495523830808.dkr.ecr.ap-northeast-2.amazonaws.com/eks-workshop-product
     replicas: 1
 ingress:
-    acm-arn: arn:aws:acm:ap-northeast-2:{root}:certificate/{random-string}
-ingress-controller:
-    vpc-id: vpc-0a0665380933088b3
+    acmArn: arn:aws:acm:ap-northeast-2:495523830808:certificate/c811c7ff-8ad4-4f1f-9bbd-a48d7d8aab0c
+ingressController:
+    vpcId: vpc-0943cc9a7fc318adb
