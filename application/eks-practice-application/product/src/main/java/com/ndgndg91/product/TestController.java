@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-public class ProductController {
+public class TestController {
 
     @GetMapping("/product")
     public ResponseEntity<String> ok() {

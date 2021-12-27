@@ -3,13 +3,30 @@ server:
 spring:
   application:
     name: product
+  datasource:
+    username: ${DB_USERNMAE:root}
+    password: ${DB_PASSWORD:tcd}
+    url: jdbc:mysql://${DB_HOST:localhost:3306}/${DB_NAME:testcontainers_demo}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+        ddl-auto: validate
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        use-new-id-generator-mappings: false
+    open-in-view: false
+    mapping-resources:
+    generate-ddl: true
+    show-sql: true
+logging:
+  level:
+#    web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 aws:
   xray:
     daemon-address: xray-service:2000
-logging:
-  level:
-    #    root: DEBUG
-    web: DEBUG
+
 management:
   endpoint:
     health:
