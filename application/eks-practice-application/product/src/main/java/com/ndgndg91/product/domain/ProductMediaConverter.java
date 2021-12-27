@@ -1,21 +1,21 @@
 package com.ndgndg91.product.domain;
 
-import lombok.extern.slf4j.Slf4j;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.ndgndg91.product.global.JsonConverter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.List;
 
-@Slf4j
 @Converter
 public class ProductMediaConverter implements AttributeConverter<List<Media>, String> {
     @Override
     public String convertToDatabaseColumn(List<Media> attribute) {
-        return null;
+        return JsonConverter.toJson(attribute);
     }
 
     @Override
     public List<Media> convertToEntityAttribute(String dbData) {
-        return null;
+        return JsonConverter.fromJson(dbData, new TypeReference<>() {});
     }
 }

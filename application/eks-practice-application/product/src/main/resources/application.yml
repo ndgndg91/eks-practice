@@ -25,7 +25,7 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 aws:
   xray:
-    daemon-address: xray-service:2000
+    daemon-address: ${XRAY_SERVICE:xray-service:2000}
 
 management:
   endpoint:

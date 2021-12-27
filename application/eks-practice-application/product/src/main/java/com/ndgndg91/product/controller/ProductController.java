@@ -1,6 +1,8 @@
 package com.ndgndg91.product.controller;
 
 import com.ndgndg91.product.controller.dto.request.CreateProductRequest;
+import com.ndgndg91.product.controller.dto.response.ProductResponse;
+import com.ndgndg91.product.global.ApiResult;
 import com.ndgndg91.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +27,10 @@ public class ProductController {
     }
 
     @GetMapping("/apis/products/{id}")
-    public ResponseEntity<?> findById(
+    public ResponseEntity<ApiResult<ProductResponse>> findById(
             @PathVariable final long id
     ) {
         final var product = productService.findById(id).orElseThrow();
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ApiResult.ok(new ProductResponse(product)));
     }
 }
