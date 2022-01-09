@@ -1,4 +1,4 @@
-rootProject.name = 'eks-practice-application'
+rootProject.name = 'eks-practice-back'
 include("seller-auth")
 include("buyer-auth")
 include("product")
