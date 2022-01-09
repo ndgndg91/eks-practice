@@ -44,7 +44,7 @@ jobs:
     - name: Set env to production
       run: |
         if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "ECR_SELLER=eks-workshop-seller-auth" >> $GITHUB_ENV
+            echo "ECR_SELLER=--workshop-seller-auth" >> $GITHUB_ENV
             echo "ECR_BUYER=eks-workshop-buyer-auth" >> $GITHUB_ENV
             echo "ECR_PRODUCT=eks-workshop-product" >> $GITHUB_ENV
             echo "ECR_ORDER=eks-workshop-order" >> $GITHUB_ENV
@@ -84,7 +84,7 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: |
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         chmod +x gradlew
 
     - name: Login to Amazon ECR
@@ -100,7 +100,7 @@ jobs:
       run: |
         # Build a docker container and
         # push it to ECR
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         ./gradlew clean
         ./gradlew :seller-auth:build --stacktrace
         cd seller-auth
@@ -117,7 +117,7 @@ jobs:
       run: |
         # Build a docker container and
         # push it to ECR
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         ./gradlew clean
         ./gradlew :buyer-auth:build --stacktrace
         cd buyer-auth
@@ -134,7 +134,7 @@ jobs:
       run: |
         # Build a docker container and
         # push it to ECR
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         ./gradlew clean
         ./gradlew :product:build --stacktrace
         cd product
@@ -151,7 +151,7 @@ jobs:
       run: |
         # Build a docker container and
         # push it to ECR
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         ./gradlew clean
         ./gradlew :order:build --stacktrace
         cd order
@@ -168,7 +168,7 @@ jobs:
       run: |
         # Build a docker container and
         # push it to ECR
-        cd application/eks-practice-application
+        cd application/eks-practice-back
         ./gradlew clean
         ./gradlew :batch:build --stacktrace
         cd batch
