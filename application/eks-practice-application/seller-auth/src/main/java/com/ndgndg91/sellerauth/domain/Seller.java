@@ -52,7 +52,7 @@ public class Seller extends BaseEntity {
 
     private String fullName;
     @Embedded
-    @AttributeOverride(name = "day", column = @Column(name = "birth_day"))
+    @AttributeOverride(name = "day", column = @Column(name = "birthday"))
     private Birthday birthday;
     @Enumerated(EnumType.STRING)
     private Sex sex;

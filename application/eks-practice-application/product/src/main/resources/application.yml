@@ -5,8 +5,8 @@ spring:
     name: product
   datasource:
     username: ${DB_USERNMAE:root}
-    password: ${DB_PASSWORD:tcd}
-    url: jdbc:mysql://${DB_URL:localhost:3306/testcontainers_demo}
+    password: ${DB_PASSWORD:commerce}
+    url: jdbc:mysql://${DB_URL:localhost:3306/commerce}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

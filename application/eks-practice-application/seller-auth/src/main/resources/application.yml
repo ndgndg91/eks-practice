@@ -4,9 +4,9 @@ spring:
   application:
     name: seller-auth
   datasource:
-    url: jdbc:mysql://${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_URL:localhost:3306/commerce}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:commerce}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true

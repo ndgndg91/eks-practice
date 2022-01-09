@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @Slf4j
@@ -27,7 +28,7 @@ public class SellerController {
 
     private final SellerRepository sellerRepository;
 
-    @GetMapping("/sellers/{id}")
+    @GetMapping("/apis/sellers/{id}")
     public ResponseEntity<ApiResult<SellerResponse>> findById(
         @PathVariable long id
     ) {
@@ -37,9 +38,9 @@ public class SellerController {
         return ResponseEntity.ok(body(new SellerResponse(seller)));
     }
 
-    @PostMapping("/sellers")
+    @PostMapping("/apis/sellers")
     public ResponseEntity<Void> create(
-        @RequestBody final CreateSellerRequest request
+        @RequestBody @Valid final CreateSellerRequest request
     ) {
         var save = sellerRepository.save(request.toSeller());
         return ResponseEntity

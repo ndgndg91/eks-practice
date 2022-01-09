@@ -5,8 +5,8 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: tcd
-      MYSQL_DATABASE: testcontainers_demo
+      MYSQL_ROOT_PASSWORD: commerce
+      MYSQL_DATABASE: commerce
       TZ: Asia/Seoul
     ports:
       - "3306:3306"
