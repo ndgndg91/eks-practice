@@ -1,0 +1,55 @@
+.header {
+  background:  #434256;
+  border-bottom: .1rem solid #F0F0F5;
+  display: block;
+  height: 5.2rem;
+  left: 0;
+  max-width: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.header-wrapper {
+  max-width: 97%;
+  margin: 0 auto;
+}
+
+.header-wrapper .nav-menu {
+  list-style: none;
+  margin-bottom: 0;
+  margin-right: 5rem;
+}
+
+@media (min-width: 80rem){
+  .header-wrapper .nav-menu {
+    margin-right: 0;
+  }
+}
+
+.header-wrapper .navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 5.2rem;
+  color: #F0F0F5;
+  padding: 0;
+  text-decoration: none;
+}
+
+.header-wrapper .nav-menu .nav-item {
+  float: left;
+  margin-bottom: 0;
+  margin-left: 2.5rem;
+  position: relative;
+}
+
+.header-wrapper .nav-menu .nav-item .nav-link {
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 5.2rem;
+  color: #F0F0F5;
+  padding: 0;
+  text-decoration: none;
+}

@@ -1,0 +1,72 @@
+<form [formGroup]="signUpFormGroup" (ngSubmit)="signUp()" class="myForm">
+  <fieldset>
+    <div formGroupName="giriStoreWorkerSignUp" class="form-area">
+      <h1>Giri Store Management</h1>
+      <h2>회원 가입</h2>
+      <label for="identifier">ID</label>
+      <input formControlName="identifier" type="text" id="identifier" placeholder="이메일">
+      <div *ngIf="identifier.invalid && (identifier.dirty || identifier.touched)" class="alert alert-danger">
+        <div *ngIf="identifier.errors.required || identifier.errors.notAllowBlank">
+          ID 를 입력해주세요.
+        </div>
+        <div *ngIf="identifier.errors.minlength">
+          ID 는 최소 3자리입니다.
+        </div>
+        <div *ngIf="identifier.errors.maxlength">
+          ID 는 최대 35자리입니다.
+        </div>
+      </div>
+      <p></p>
+      <div>
+        <label for="password">Password</label>
+        <input formControlName="password" type="password" id="password" placeholder="비밀번호">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            비밀번호를 입력해주세요.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            비밀번호는 최소 10자리입니다.
+          </div>
+          <div *ngIf="password.errors.maxlength">
+            비밀번호는 최대 50자리입니다.
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div style="font-weight: 600; font-size: 0.9em">약관 동의</div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <input type="checkbox" id="required_agreement" style="margin-bottom: 0;" (change)="allAgree($event)" [checked]="allTermsChecked"/>
+        <label for="required_agreement">모두 동의합니다.</label>
+      </div>
+      <pre style="display: block; font-size: 0.5em; padding: 10px; margin: 0 20px; border-left: none; text-align: left">동의에는 필수 및 선택 목적(광고성 정보 수신 포함)에 대한 동의가 포함되어 있으며,
+        선택 목적의 동의를 거부하시는 경우에도 서비스 이용이 가능합니다.</pre>
+      <p></p>
+      <div class="alert alert-danger"
+           *ngIf="termsFourteen.invalid && (termsFourteen.dirty || termsFourteen.touched) ||
+                  termsService.invalid && (termsService.dirty || termsService.touched) ||
+                  termsCommerce.invalid && (termsCommerce.dirty || termsCommerce.touched) ||
+                  termsPrivacyCollectUse.invalid && (termsPrivacyCollectUse.dirty || termsPrivacyCollectUse.touched) ||
+                  termsAgreeToCollectThirdPArtInformation.invalid && (termsAgreeToCollectThirdPArtInformation.dirty || termsAgreeToCollectThirdPArtInformation.touched) ">
+        필수 항목에 모두 동의해주세요
+      </div>
+      <div>
+        <ng-container *ngFor="let term of terms">
+          <div style="display: flex; align-items: center; gap: 8px; height: 50px">
+
+            <input type="checkbox" formControlName="{{ term.id }}"
+                   id="{{ term.id }}" style="margin-bottom: 0;" [checked]="term.checked" (change)="observe($event)">
+            <label for="{{ term.id }}">
+              <span style="font-weight: 500; font-size: 0.9em">{{ term.label }}</span>
+            </label>
+
+          </div>
+        </ng-container>
+      </div>
+      <hr>
+      <p></p>
+      <button class="button-primary" type="submit">회원가입</button>
+      <p></p>
+      <button class="button-outline" routerLink="/sign-in">로그인 하러가기</button>
+    </div>
+  </fieldset>
+</form>

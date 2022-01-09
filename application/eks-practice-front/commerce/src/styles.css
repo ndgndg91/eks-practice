@@ -1,0 +1,69 @@
+/* You can add global styles to this file, and also import other style files */
+.myForm {
+  min-width: 500px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem
+}
+
+.myForm input {
+  height: 6rem;
+  font-size: 2rem;
+  padding: 1.5rem 1rem;
+}
+
+.myForm button {
+  width: 100%;
+  height: 6rem;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 500px) {
+  .myForm {
+    min-width: 90%;
+  }
+}
+
+/* alert css */
+.alert {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.alert.alert-danger {
+  color:  #ED4E5C;
+}
+
+.alert.alert-success {
+  color: skyblue;
+}
+
+/* reset css */
+html, body { height: 100%; }
+body { margin: 0; padding: 0; box-sizing: border-box; }
+body * {box-sizing: border-box;}
+input { box-sizing: border-box;}
+ol, ul {list-style-type: none;}
+
+
+/* milligram color reset */
+input[type='color']:focus, input[type='date']:focus, input[type='datetime']:focus, input[type='datetime-local']:focus, input[type='email']:focus, input[type='month']:focus, input[type='number']:focus, input[type='password']:focus, input[type='search']:focus, input[type='tel']:focus, input[type='text']:focus, input[type='url']:focus, input[type='week']:focus, input:not([type]):focus, textarea:focus, select:focus {
+  border-color: #6D6BD1;
+}
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+  background-color: #6D6BD1;
+  border-color: #6D6BD1;
+}
+
+.button.button-outline, button.button-outline, input[type='button'].button-outline, input[type='reset'].button-outline, input[type='submit'].button-outline {
+  color: #6D6BD1;
+}
+
+a {
+  color: #6D6BD1;
+}
